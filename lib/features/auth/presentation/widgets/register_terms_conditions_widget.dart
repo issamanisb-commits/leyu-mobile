@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:leyu_mobile/core/utils/message.dart';
 
 import '../../../../core/utils/screen_size.dart';
 import '../../../../core/widgets/button.dart';
-import '../../../../core/widgets/date_picker.dart';
-import '../../../../core/widgets/dropdown.dart';
-import '../../../../core/widgets/input_box.dart';
 import '../controllers/auth_controller.dart';
 
 class RegisterTermsConditionsWidget extends StatelessWidget {
@@ -15,23 +11,23 @@ class RegisterTermsConditionsWidget extends StatelessWidget {
   final AuthController _authController = Get.find();
 
   List<Map<String, String>> get termsAndConditions => [
-    {
-      "title": "auth.profile.terms_1_title".tr,
-      "content": "auth.profile.terms_1_content".tr
-    },
-    {
-      "title": "auth.profile.terms_2_title".tr,
-      "content": "auth.profile.terms_2_content".tr
-    },
-    {
-      "title": "auth.profile.terms_3_title".tr,
-      "content": "auth.profile.terms_3_content".tr
-    },
-    {
-      "title": "auth.profile.terms_4_title".tr,
-      "content": "auth.profile.terms_4_content".tr
-    }
-  ];
+        {
+          "title": "auth.profile.terms_1_title".tr,
+          "content": "auth.profile.terms_1_content".tr
+        },
+        {
+          "title": "auth.profile.terms_2_title".tr,
+          "content": "auth.profile.terms_2_content".tr
+        },
+        {
+          "title": "auth.profile.terms_3_title".tr,
+          "content": "auth.profile.terms_3_content".tr
+        },
+        {
+          "title": "auth.profile.terms_4_title".tr,
+          "content": "auth.profile.terms_4_content".tr
+        }
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +39,9 @@ class RegisterTermsConditionsWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: getScreenHeight(context)*0.025,),
+                SizedBox(
+                  height: getScreenHeight(context) * 0.025,
+                ),
                 Row(
                   children: [
                     InkWell(
@@ -57,33 +55,45 @@ class RegisterTermsConditionsWidget extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: getScreenHeight(context) * 0.025),
-                Text("auth.profile.terms_title".tr,style: const TextStyle(fontSize: 28,fontWeight: FontWeight.w900),),
+                Text(
+                  "auth.profile.terms_title".tr,
+                  style: const TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.w900),
+                ),
                 const SizedBox(height: 5),
-                Text("auth.profile.terms_subtitle".tr,style: const TextStyle(fontSize: 13,color: Colors.black54),),
+                Text(
+                  "auth.profile.terms_subtitle".tr,
+                  style: const TextStyle(fontSize: 13, color: Colors.black54),
+                ),
                 SizedBox(height: getScreenHeight(context) * 0.02),
                 Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  padding: const EdgeInsets.all(15.0),
-                  margin: const EdgeInsets.symmetric(horizontal: 3.0),
-                  child: Column(
-                    children: [
-                      ...termsAndConditions.map((term) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(term["title"]!, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 5),
-                            Text(term["content"]!, style: const TextStyle(fontSize: 14, color: Colors.black54)),
-                          ],
-                        ),
-                      ))],
-                  )
-                )
-
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    padding: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 3.0),
+                    child: Column(
+                      children: [
+                        ...termsAndConditions.map((term) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(term["title"]!,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                  const SizedBox(height: 5),
+                                  Text(term["content"]!,
+                                      style: const TextStyle(
+                                          fontSize: 14, color: Colors.black54)),
+                                ],
+                              ),
+                            ))
+                      ],
+                    ))
               ],
             ),
           ),
@@ -93,10 +103,10 @@ class RegisterTermsConditionsWidget extends StatelessWidget {
           loadingText: "Continuing".tr,
           fontSize: 16,
           onPressed: () {
-           _authController.currentPage.value = 2;
+            _authController.currentPage.value = 2;
           },
         ),
-        SizedBox(height: getScreenHeight(context)*0.025),
+        SizedBox(height: getScreenHeight(context) * 0.025),
       ],
     );
   }

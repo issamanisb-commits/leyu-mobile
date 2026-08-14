@@ -80,7 +80,8 @@ class StorageErrorHandler {
   }
 
   /// Handle directory creation errors
-  static void handleDirectoryCreationError(dynamic error, {bool showToUser = true}) {
+  static void handleDirectoryCreationError(dynamic error,
+      {bool showToUser = true}) {
     if (!showToUser) return;
 
     if (_isStorageSpaceError(error)) {

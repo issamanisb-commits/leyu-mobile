@@ -43,8 +43,8 @@ class MicroTaskEntity {
     return MicroTaskEntity(
       id: model.id,
       instruction: model.instruction,
-      audioUrl:filePath,
-      imageUrl:filePath,
+      audioUrl: filePath,
+      imageUrl: filePath,
       text: model.text,
       submissionAudioUrl: model.dataset?.filePath,
       submissionText: model.dataset?.textDataset,

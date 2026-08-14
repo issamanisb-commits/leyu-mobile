@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:leyu_mobile/core/theme/app_colors.dart';
 import 'package:leyu_mobile/core/widgets/button.dart';
-import 'package:leyu_mobile/core/widgets/dropdown.dart';
 import 'package:leyu_mobile/core/widgets/input_box.dart';
-import 'package:leyu_mobile/core/widgets/date_picker.dart';
-import 'package:leyu_mobile/features/auth/domain/entities/dialect_entity.dart';
-import 'package:leyu_mobile/features/auth/domain/entities/language_entity.dart';
 import '../controllers/profile_controller.dart';
 
 class EditProfileWidget extends StatelessWidget {
@@ -26,7 +22,7 @@ class EditProfileWidget extends StatelessWidget {
           const SizedBox(height: 30),
 
           // Form Section
-          _buildFormSection(formKey , controller),
+          _buildFormSection(formKey, controller),
           const SizedBox(height: 10),
         ],
       ),
@@ -46,16 +42,18 @@ class EditProfileWidget extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.primary, width: 3),
               ),
-              child: Obx(()=>ClipOval(
-                child: controller.profileImage.value.isNotEmpty
-                    ? Image.network(
-                  controller.profileImage.value,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      _buildDefaultProfileImage(),
-                )
-                    : _buildDefaultProfileImage(),
-              ),),
+              child: Obx(
+                () => ClipOval(
+                  child: controller.profileImage.value.isNotEmpty
+                      ? Image.network(
+                          controller.profileImage.value,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              _buildDefaultProfileImage(),
+                        )
+                      : _buildDefaultProfileImage(),
+                ),
+              ),
             ),
             Positioned(
               bottom: 0,
@@ -72,19 +70,19 @@ class EditProfileWidget extends StatelessWidget {
                   ),
                   child: Obx(() => controller.isUploadingProfilePicture.value
                       ? const SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor:
-                      AlwaysStoppedAnimation<Color>(AppColors.white),
-                    ),
-                  )
+                          width: 15,
+                          height: 15,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(AppColors.white),
+                          ),
+                        )
                       : const Icon(
-                    Icons.camera_alt,
-                    color: AppColors.white,
-                    size: 15,
-                  )),
+                          Icons.camera_alt,
+                          color: AppColors.white,
+                          size: 15,
+                        )),
                 ),
               ),
             ),
@@ -105,7 +103,8 @@ class EditProfileWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildFormSection(GlobalKey<FormState> formKey , ProfileController controller) {
+  Widget _buildFormSection(
+      GlobalKey<FormState> formKey, ProfileController controller) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Form(
@@ -212,13 +211,14 @@ class EditProfileWidget extends StatelessWidget {
               isOptional: false,
               enabled: false,
             ),
+            _buildActionButtons(controller),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ButtonWidget(
-                  text:'profile.cancel_button'.tr,
-                  onPressed: (){
+                  text: 'profile.cancel_button'.tr,
+                  onPressed: () {
                     controller.cancelEdit();
                   },
                   fill: false,
@@ -228,21 +228,21 @@ class EditProfileWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Obx(() => ButtonWidget(
-                  isLoading: controller.isEditingProfile.value,
-                  text: 'profile.save_button'.tr,
-                  loadingText: 'profile.saving_button'.tr,
-                  onPressed: (){
-                    if(formKey.currentState!.validate()){
-                      controller.saveProfile();
-                    }
-                  },
-                  width: 150,
-                  height: 40,
-                  fontSize: 15,
-                ))
+                      isLoading: controller.isEditingProfile.value,
+                      text: 'profile.save_button'.tr,
+                      loadingText: 'profile.saving_button'.tr,
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          controller.saveProfile();
+                        }
+                      },
+                      width: 150,
+                      height: 40,
+                      fontSize: 15,
+                    ))
               ],
             ),
-            SizedBox(height: 20)
+            const SizedBox(height: 20)
           ],
         ),
       ),
@@ -251,7 +251,7 @@ class EditProfileWidget extends StatelessWidget {
 
   Widget _buildActionButtons(ProfileController controller) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       child: Row(
         children: [
           // Cancel Button
@@ -285,7 +285,7 @@ class EditProfileWidget extends StatelessWidget {
 
           // Save Button
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: 50,
               child: ElevatedButton(
                 onPressed: controller.saveProfile,

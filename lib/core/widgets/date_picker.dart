@@ -140,7 +140,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                 ],
               ),
             ),
-          Container(
+          SizedBox(
             width: getScreenWidth(context) < 500 ? double.infinity : 500,
             child: TextFormField(
               focusNode: widget.focus,

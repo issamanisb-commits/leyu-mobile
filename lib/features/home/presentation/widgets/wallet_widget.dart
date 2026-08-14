@@ -70,7 +70,7 @@ class WalletWidget extends StatelessWidget {
                 ? Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 20),
-                    child: LoadingWidget(
+                    child: const LoadingWidget(
                       isTransparent: true,
                       size: 25,
                       height: 30,
@@ -89,7 +89,7 @@ class WalletWidget extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           // add broken line
-          BrokenLineWidget(),
+          const BrokenLineWidget(),
           const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -114,10 +114,12 @@ class WalletWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15), // translucent
+                        color:
+                            Colors.white.withValues(alpha: 0.15), // translucent
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                            color: Colors.white.withOpacity(0.3), width: 1),
+                            color: Colors.white.withValues(alpha: 0.3),
+                            width: 1),
                       ),
                       child: Row(
                         children: [
@@ -150,10 +152,11 @@ class WalletWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                            color: Colors.white.withOpacity(0.3), width: 1),
+                            color: Colors.white.withValues(alpha: 0.3),
+                            width: 1),
                       ),
                       child: Row(
                         children: [
@@ -212,6 +215,8 @@ class BrokenLinePainter extends CustomPainter {
 }
 
 class BrokenLineWidget extends StatelessWidget {
+  const BrokenLineWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(

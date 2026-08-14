@@ -41,7 +41,8 @@ class ProfileRemoteDataSource {
     }
   }
 
-  Future<bool> changePassword(String currentPassword, String newPassword) async {
+  Future<bool> changePassword(
+      String currentPassword, String newPassword) async {
     final response = await _apiClient.put('/iam/users/change-password', data: {
       'current_password': currentPassword,
       'new_password': newPassword,
@@ -74,7 +75,8 @@ class ProfileRemoteDataSource {
 
   Future<bool> updatePreferredLanguage(String languageCode) async {
     print('Updating preferred language to: $languageCode');
-    final response = await _apiClient.patch('/iam/users/preferred-language', data: {
+    final response =
+        await _apiClient.patch('/iam/users/preferred-language', data: {
       'language_key': languageCode,
     });
     return response.statusCode == 200;

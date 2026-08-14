@@ -56,7 +56,7 @@ class _TextToSpeechWidgetState extends State<TextToSpeechWidget> {
   Duration _recordingDuration = Duration.zero;
 
   // For waveform visualization
-  List<double> _amplitudes = [];
+  final List<double> _amplitudes = [];
   Timer? _amplitudeTimer;
   Timer? _durationTimer;
 
@@ -92,7 +92,7 @@ class _TextToSpeechWidgetState extends State<TextToSpeechWidget> {
       _currentFilePath = _controller.getRecordedAudioPath();
 
       if (_currentFilePath != null) {
-        final fileExists = await File(_currentFilePath!).existsSync();
+        final fileExists = File(_currentFilePath!).existsSync();
         _hasRecording = fileExists;
         print(
             'InitState: Found recording at $_currentFilePath, exists: $fileExists');
@@ -762,7 +762,7 @@ class _TextToSpeechWidgetState extends State<TextToSpeechWidget> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 3),
@@ -978,8 +978,8 @@ class _TextToSpeechWidgetState extends State<TextToSpeechWidget> {
       overCircle: true,
       circleColors: const [AppColors.primary],
       colors: [
-        AppColors.primary.withOpacity(0.2),
-        AppColors.primary.withOpacity(0.1),
+        AppColors.primary.withValues(alpha: 0.2),
+        AppColors.primary.withValues(alpha: 0.1),
       ],
       child: Padding(
         padding: const EdgeInsets.all(2.0),

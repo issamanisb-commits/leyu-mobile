@@ -1,3 +1,5 @@
+import 'core/theme/app_themes.dart';
+import 'core/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
@@ -53,6 +55,7 @@ void main() async {
   // Initialize OneSignal
   await OneSignalService.initialize();
 
+  await ThemeService.init();
   runApp(const MyApp());
 }
 
@@ -96,7 +99,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Leyu',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'openSans', useMaterial3: false),
+      theme: AppThemes.light,
+      darkTheme: AppThemes.dark,
+      themeMode: ThemeService().theme,
       // Localization configuration
       translations: AppTranslations(),
       locale: Get.find<LocalizationController>().locale,

@@ -14,16 +14,15 @@ class DropdownWidget extends StatelessWidget {
   final double radius;
   final bool isRequired;
 
-  const DropdownWidget({
-    super.key,
-    required this.label,
-    this.content,
-    required this.icon,
-    required this.onTap,
-    this.height = 50,
-    this.radius = 7,
-    this.isRequired = false
-  });
+  const DropdownWidget(
+      {super.key,
+      required this.label,
+      this.content,
+      required this.icon,
+      required this.onTap,
+      this.height = 50,
+      this.radius = 7,
+      this.isRequired = false});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +34,28 @@ class DropdownWidget extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(bottom: 5,left: 3),
+              margin: const EdgeInsets.only(bottom: 5, left: 3),
               child: Row(
                 children: [
-                  Text(label, style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.black),),
-                  const SizedBox(width: 3,),
-                  isRequired?const Text("*", style:TextStyle(fontSize: 15,fontWeight: FontWeight.normal,color: AppColors.red),):Container(),
+                  Text(
+                    label,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  isRequired
+                      ? const Text(
+                          "*",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                              color: AppColors.red),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -48,8 +63,7 @@ class DropdownWidget extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(radius)
-              ),
+                  borderRadius: BorderRadius.circular(radius)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,8 +75,18 @@ class DropdownWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           icon,
-                          const SizedBox(width: 10,),
-                          Text(content??'validation.choose_field'.trParams({'field': label.toLowerCase()}),style: TextStyle(fontSize:  content== null?13:14,color: content== null?Colors.grey:Colors.black))
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                              content ??
+                                  'validation.choose_field'
+                                      .trParams({'field': label.toLowerCase()}),
+                              style: TextStyle(
+                                  fontSize: content == null ? 13 : 14,
+                                  color: content == null
+                                      ? Colors.grey
+                                      : Colors.black))
                         ],
                       ),
                     ),
@@ -70,10 +94,13 @@ class DropdownWidget extends StatelessWidget {
                   Container(
                     decoration: const BoxDecoration(
                         border: Border(left: BorderSide(color: Colors.black)),
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(10),bottomRight: Radius.circular(10)),
-                        color: AppColors.gray
-                    ),
-                    child: Center(child: assetSvgImageWidget("dropdown.svg",width: 25,height: 25)),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                        color: AppColors.gray),
+                    child: Center(
+                        child: assetSvgImageWidget("dropdown.svg",
+                            width: 25, height: 25)),
                   )
                 ],
               ),
@@ -150,7 +177,8 @@ class _DropdownBoxWidgetState<T> extends State<DropdownBoxWidget<T>> {
                 children: [
                   Text(
                     widget.label,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                   if (!widget.isOptional)
                     const Text(
@@ -168,7 +196,10 @@ class _DropdownBoxWidgetState<T> extends State<DropdownBoxWidget<T>> {
             value: widget.selectedItem,
             focusNode: widget.focus,
             iconStyleData: IconStyleData(
-              icon: widget.isItemsLoading || widget.items.isEmpty ? const SizedBox.shrink() : const Icon(Icons.keyboard_arrow_down, color: Colors.grey, size: 28),
+              icon: widget.isItemsLoading || widget.items.isEmpty
+                  ? const SizedBox.shrink()
+                  : const Icon(Icons.keyboard_arrow_down,
+                      color: Colors.grey, size: 28),
             ),
             dropdownStyleData: DropdownStyleData(
               decoration: BoxDecoration(
@@ -176,7 +207,6 @@ class _DropdownBoxWidgetState<T> extends State<DropdownBoxWidget<T>> {
                 borderRadius: BorderRadius.circular(widget.borderRadius),
               ),
             ),
-
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColors.inputBgColor,
@@ -191,7 +221,8 @@ class _DropdownBoxWidgetState<T> extends State<DropdownBoxWidget<T>> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: const BorderSide(color: AppColors.primary, width: 1),
+                borderSide:
+                    const BorderSide(color: AppColors.primary, width: 1),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -200,24 +231,33 @@ class _DropdownBoxWidgetState<T> extends State<DropdownBoxWidget<T>> {
               errorStyle: const TextStyle(fontSize: 0, color: AppColors.red),
               suffixIcon: widget.isItemsLoading
                   ? const Padding(
-                    padding: EdgeInsets.only(right: 16.0),
-                    child: LoadingWidget(width:20,height:20,size:20,isTransparent: true,),):
-                   widget.items.isEmpty?
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: InkWell(
-                        onTap: widget.reFetch,
-                        child: const Icon(
-                          Icons.refresh,
-                          color: Colors.grey,
-                          size: 24,),
+                      padding: EdgeInsets.only(right: 16.0),
+                      child: LoadingWidget(
+                        width: 20,
+                        height: 20,
+                        size: 20,
+                        isTransparent: true,
                       ),
                     )
-                  : null,
+                  : widget.items.isEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: InkWell(
+                            onTap: widget.reFetch,
+                            child: const Icon(
+                              Icons.refresh,
+                              color: Colors.grey,
+                              size: 24,
+                            ),
+                          ),
+                        )
+                      : null,
             ),
             hint: Text(
-              widget.placeHolder ?? 'validation.select_field'.trParams({'field': widget.label}),
-              style: const TextStyle(fontSize: 13, color: Colors.grey, fontFamily: 'openSans'),
+              widget.placeHolder ??
+                  'validation.select_field'.trParams({'field': widget.label}),
+              style: const TextStyle(
+                  fontSize: 13, color: Colors.grey, fontFamily: 'openSans'),
             ),
             style: const TextStyle(fontSize: 15, color: Colors.black),
             items: widget.items.map((T item) {
@@ -231,12 +271,14 @@ class _DropdownBoxWidgetState<T> extends State<DropdownBoxWidget<T>> {
               _updateErrorText(null);
               if (widget.focusNext != null) {
                 FocusScope.of(context).requestFocus(widget.focusNext);
-                Scrollable.ensureVisible(widget.focusNext!.context!, alignment: 0.5);
+                Scrollable.ensureVisible(widget.focusNext!.context!,
+                    alignment: 0.5);
               }
             },
             validator: (T? value) {
               if (!widget.isOptional && value == null) {
-                _updateErrorText('validation.field_required'.trParams({'field': widget.label}));
+                _updateErrorText('validation.field_required'
+                    .trParams({'field': widget.label}));
                 return '';
               }
               _updateErrorText(null);

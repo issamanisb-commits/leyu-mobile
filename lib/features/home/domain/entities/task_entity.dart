@@ -41,26 +41,25 @@ class TaskEntity {
   static TaskEntity fromModel(Task model) {
     try {
       return TaskEntity(
-          id: model.id ?? '',
-          name: model.name ?? '',
-          description: model.description ?? '',
-          type: parseTaskType(model.type),
-          status: parseTaskStatus(model.status , model.requireContributorTest ?? false),
-          requireContributorTest: model.requireContributorTest ?? false,
-          dueDate: model.dueDate,
-          averageTime: model.averageTime ?? 10,
-          doneCount: model.doneCount ?? 0,
-          totalCount: model.totalCount == 0 ? 1 : model.totalCount ?? 1,
-          rejectedCount: model.rejectedCount ?? 0,
-          approvedCount: model.approvedCount ?? 0,
-          pendingCount: model.pendingCount ?? 0,
-          estimatedEarning: model.estimatedEarning,
-          earningPerTask: model.earningPerTask,
+        id: model.id ?? '',
+        name: model.name ?? '',
+        description: model.description ?? '',
+        type: parseTaskType(model.type),
+        status: parseTaskStatus(
+            model.status, model.requireContributorTest ?? false),
+        requireContributorTest: model.requireContributorTest ?? false,
+        dueDate: model.dueDate,
+        averageTime: model.averageTime ?? 10,
+        doneCount: model.doneCount ?? 0,
+        totalCount: model.totalCount == 0 ? 1 : model.totalCount ?? 1,
+        rejectedCount: model.rejectedCount ?? 0,
+        approvedCount: model.approvedCount ?? 0,
+        pendingCount: model.pendingCount ?? 0,
+        estimatedEarning: model.estimatedEarning,
+        earningPerTask: model.earningPerTask,
       );
-    }
-    catch (e) {
+    } catch (e) {
       throw Exception('Error parsing Task model: $e');
     }
   }
 }
-

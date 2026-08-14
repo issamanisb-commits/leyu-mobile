@@ -15,14 +15,15 @@ class ManagedAudioPlayerWidget extends StatefulWidget {
   });
 
   @override
-  State<ManagedAudioPlayerWidget> createState() => _ManagedAudioPlayerWidgetState();
+  State<ManagedAudioPlayerWidget> createState() =>
+      _ManagedAudioPlayerWidgetState();
 }
 
 class _ManagedAudioPlayerWidgetState extends State<ManagedAudioPlayerWidget>
     with AutomaticKeepAliveClientMixin {
-
   @override
-  bool get wantKeepAlive => false; // Don't keep the widget alive when scrolled away
+  bool get wantKeepAlive =>
+      false; // Don't keep the widget alive when scrolled away
 
   @override
   void deactivate() {
@@ -30,7 +31,8 @@ class _ManagedAudioPlayerWidgetState extends State<ManagedAudioPlayerWidget>
     try {
       final audioManager = Get.find<AudioManagerService>();
       audioManager.stopAllAudio();
-      print('ManagedAudioPlayer: Stopped all audio on deactivate for ${widget.microTaskId}');
+      print(
+          'ManagedAudioPlayer: Stopped all audio on deactivate for ${widget.microTaskId}');
     } catch (e) {
       print('ManagedAudioPlayer: Error stopping audio on deactivate: $e');
     }

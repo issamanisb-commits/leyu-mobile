@@ -161,7 +161,7 @@ class _TaskInstructionBottomSheetState
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(
@@ -438,8 +438,8 @@ class _TaskInstructionBottomSheetState
                                         if (!_isVideoPlaying)
                                           Container(
                                             decoration: BoxDecoration(
-                                              color:
-                                                  Colors.black.withOpacity(0.3),
+                                              color: Colors.black
+                                                  .withValues(alpha: 0.3),
                                               shape: BoxShape.circle,
                                             ),
                                             child: IconButton(
@@ -458,7 +458,7 @@ class _TaskInstructionBottomSheetState
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 color: Colors.black
-                                                    .withOpacity(0.5),
+                                                    .withValues(alpha: 0.5),
                                                 shape: BoxShape.circle,
                                               ),
                                               child: IconButton(
@@ -576,7 +576,7 @@ class _TaskInstructionBottomSheetState
         Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.1),
+            color: AppColors.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
@@ -624,7 +624,7 @@ class _TaskInstructionBottomSheetState
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: AppColors.primary.withOpacity(0.2),
+          color: AppColors.primary.withValues(alpha: 0.2),
           width: 1.5,
         ),
       ),
@@ -666,7 +666,7 @@ class _TaskInstructionBottomSheetState
           decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -695,14 +695,14 @@ class _TaskInstructionBottomSheetState
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.launch, size: 16, color: AppColors.primary),
-                    const SizedBox(width: 6),
+                    SizedBox(width: 6),
                     Text(
                       'Open in Browser',
                       style: TextStyle(
@@ -735,11 +735,12 @@ class _TaskInstructionBottomSheetState
           decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
           ),
           child: Row(
             children: [
-              Icon(Icons.open_in_browser, color: AppColors.primary, size: 32),
+              const Icon(Icons.open_in_browser,
+                  color: AppColors.primary, size: 32),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
@@ -764,7 +765,7 @@ class _TaskInstructionBottomSheetState
                   ],
                 ),
               ),
-              Icon(Icons.launch, size: 20, color: AppColors.primary),
+              const Icon(Icons.launch, size: 20, color: AppColors.primary),
             ],
           ),
         ),

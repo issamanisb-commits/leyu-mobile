@@ -29,13 +29,13 @@ class RegisterProfilePage extends StatelessWidget {
                   child: Obx(() {
                     int currentPage = _authController.currentPage.value;
                     return currentPage == 0
-                        ? RegisterUserInfoWidget()
+                        ? const RegisterUserInfoWidget()
                         : currentPage == 1
                             ? RegisterTermsConditionsWidget()
                             : currentPage == 2
                                 ? const RegisterAdditionalInfoWidget()
                                 : currentPage == 3
-                                    ? RegisterPasswordWidget()
+                                    ? const RegisterPasswordWidget()
                                     : Container();
                   })),
             )),

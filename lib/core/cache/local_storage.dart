@@ -5,7 +5,8 @@ import '../../features/auth/data/models/user.dart';
 class LocalStorage {
   final FlutterSecureStorage storage = const FlutterSecureStorage();
 
-  Future<void> saveTokens({required String accessToken, required String refreshToken}) async {
+  Future<void> saveTokens(
+      {required String accessToken, required String refreshToken}) async {
     await storage.write(key: 'access_token', value: accessToken);
     await storage.write(key: 'refresh_token', value: refreshToken);
   }
@@ -39,8 +40,7 @@ class LocalStorage {
   Future<String?> getAccessToken() async {
     try {
       return await storage.read(key: 'access_token');
-    }
-    catch (e) {
+    } catch (e) {
       return null;
     }
   }
@@ -48,8 +48,7 @@ class LocalStorage {
   Future<String?> getRefreshToken() async {
     try {
       return await storage.read(key: 'refresh_token');
-    }
-    catch (e) {
+    } catch (e) {
       return null;
     }
   }
@@ -65,13 +64,15 @@ class LocalStorage {
         "profile_picture": await storage.read(key: 'profile_picture'),
       };
       return User.fromJson(userJson);
-    }
-    catch (e) {
+    } catch (e) {
       return null;
     }
   }
 
-  Future<void> updateUserName({required String firstName, required String middleName, required String lastName}) async {
+  Future<void> updateUserName(
+      {required String firstName,
+      required String middleName,
+      required String lastName}) async {
     await storage.write(key: 'first_name', value: firstName);
     await storage.write(key: 'middle_name', value: middleName);
     await storage.write(key: 'last_name', value: lastName);
@@ -80,5 +81,4 @@ class LocalStorage {
   Future<void> clearStorage() async {
     await storage.deleteAll();
   }
-
 }

@@ -62,4 +62,3 @@ Failure mapExceptionToFailure(Exception e) {
     return const ServerFailure("Unexpected error occurred.");
   }
 }
-

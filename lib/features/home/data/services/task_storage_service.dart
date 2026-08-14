@@ -45,7 +45,8 @@ class TaskStorageService {
 
       if (existing != null) {
         // Update existing submission
-        final updatedAudioPaths = Map<String, String>.from(existing.audioFilePaths);
+        final updatedAudioPaths =
+            Map<String, String>.from(existing.audioFilePaths);
         updatedAudioPaths[microTaskId] = filePath;
 
         final updated = existing.copyWith(
@@ -95,7 +96,8 @@ class TaskStorageService {
 
       if (existing != null) {
         // Update existing submission
-        final updatedTextOutputs = Map<String, String>.from(existing.textOutputs);
+        final updatedTextOutputs =
+            Map<String, String>.from(existing.textOutputs);
         updatedTextOutputs[microTaskId] = text;
 
         final updated = existing.copyWith(
@@ -155,7 +157,8 @@ class TaskStorageService {
         return;
       }
 
-      final updatedAudioPaths = Map<String, String>.from(existing.audioFilePaths);
+      final updatedAudioPaths =
+          Map<String, String>.from(existing.audioFilePaths);
       updatedAudioPaths.remove(microTaskId);
 
       // If both audio and text are empty, delete the entire submission
@@ -257,7 +260,8 @@ class TaskStorageService {
 
         bool hasChanges = false;
         final validAudioPaths = <String, String>{};
-        final validTextOutputs = Map<String, String>.from(submission.textOutputs);
+        final validTextOutputs =
+            Map<String, String>.from(submission.textOutputs);
 
         // Validate audio file paths
         for (final entry in submission.audioFilePaths.entries) {
@@ -294,6 +298,16 @@ class TaskStorageService {
       StorageLogger.logCleanupError(e);
       StorageErrorHandler.handleCleanupError(e, showToUser: false);
       rethrow;
+    }
+  }
+
+  /// Retrieve all task submissions stored locally
+  Future<List<TaskSubmissionModel>> getAllSubmissions() async {
+    try {
+      if (_submissionsBox == null) return [];
+      return _submissionsBox!.values.toList();
+    } catch (e) {
+      return [];
     }
   }
 }

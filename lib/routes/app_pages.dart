@@ -66,7 +66,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.home,
-      page: () => HomePage(),
+      page: () => const HomePage(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -86,7 +86,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.profilePage,
-      page: () => MainProfileScreen(),
+      page: () => const MainProfileScreen(),
       binding: ProfileBinding(),
     ),
     GetPage(

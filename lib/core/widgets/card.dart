@@ -23,7 +23,7 @@ class CardWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 110,
-        margin: const EdgeInsets.only(right: 10,bottom: 10),
+        margin: const EdgeInsets.only(right: 10, bottom: 10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -31,7 +31,7 @@ class CardWidget extends StatelessWidget {
           border: Border.all(color: AppColors.gray),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.05),
+              color: AppColors.primary.withValues(alpha: 0.05),
               spreadRadius: 1,
               blurRadius: 5,
               offset: const Offset(3, 3), // changes position of shadow
@@ -40,9 +40,18 @@ class CardWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            networkImageWidget(imageUrl: imageUrl??"",errorImageUrl: errorImageUrl?? "category.svg",borderRadius: 10),
-            const SizedBox(height: 10,),
-            Text(name, style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,),
+            networkImageWidget(
+                imageUrl: imageUrl ?? "",
+                errorImageUrl: errorImageUrl ?? "category.svg",
+                borderRadius: 10),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              name,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
         ),
       ),
@@ -56,22 +65,27 @@ class SelectableCardWidget extends StatelessWidget {
   final String? errorImageUrl;
   final bool isSelected;
 
-  const SelectableCardWidget({super.key, required this.name, this.imageUrl, required this.isSelected, this.errorImageUrl});
-
+  const SelectableCardWidget(
+      {super.key,
+      required this.name,
+      this.imageUrl,
+      required this.isSelected,
+      this.errorImageUrl});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 110,
-      margin: const EdgeInsets.only(right: 10,bottom: 10),
+      margin: const EdgeInsets.only(right: 10, bottom: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: isSelected?AppColors.green:AppColors.gray),
+        border:
+            Border.all(color: isSelected ? AppColors.green : AppColors.gray),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.05),
+            color: AppColors.primary.withValues(alpha: 0.05),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(3, 3), // changes position of shadow
@@ -80,13 +94,23 @@ class SelectableCardWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          networkImageWidget(imageUrl: imageUrl??"",errorImageUrl: errorImageUrl?? "category.svg",borderRadius: 10),
-          const SizedBox(height: 10,),
-          Text(name, style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: isSelected?AppColors.green:Colors.black),overflow: TextOverflow.ellipsis,),
+          networkImageWidget(
+              imageUrl: imageUrl ?? "",
+              errorImageUrl: errorImageUrl ?? "category.svg",
+              borderRadius: 10),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            name,
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: isSelected ? AppColors.green : Colors.black),
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );
   }
 }
-
-

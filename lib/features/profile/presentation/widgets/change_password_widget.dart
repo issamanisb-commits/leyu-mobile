@@ -16,9 +16,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
   final ProfileController _profileController = Get.find();
   final formKey = GlobalKey<FormState>();
 
-  final TextEditingController _currentPasswordController = TextEditingController();
+  final TextEditingController _currentPasswordController =
+      TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   final FocusNode _currentPasswordFocusNode = FocusNode();
   final FocusNode _newPasswordFocusNode = FocusNode();
@@ -88,19 +90,19 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
 
               // Save Button
               Obx(() => ButtonWidget(
-                text: 'profile.change_password_button'.tr,
-                loadingText: 'profile.changing_password'.tr,
-                isLoading: _profileController.isChangingPassword.value,
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    _profileController.changePassword(
-                      _currentPasswordController.text.trim(),
-                      _newPasswordController.text.trim(),
-                    );
-                  }
-                },
-                fontSize: 16,
-              )),
+                    text: 'profile.change_password_button'.tr,
+                    loadingText: 'profile.changing_password'.tr,
+                    isLoading: _profileController.isChangingPassword.value,
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        _profileController.changePassword(
+                          _currentPasswordController.text.trim(),
+                          _newPasswordController.text.trim(),
+                        );
+                      }
+                    },
+                    fontSize: 16,
+                  )),
               SizedBox(height: getScreenHeight(context) * 0.02),
             ],
           ),

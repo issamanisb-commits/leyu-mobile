@@ -8,7 +8,7 @@ enum TaskStatus {
   UNDER_REVIEW,
 }
 
-TaskStatus? parseTaskStatus(String? status , bool isTestTask) {
+TaskStatus? parseTaskStatus(String? status, bool isTestTask) {
   switch (status) {
     case 'TEST_UNDER_REVIEW':
       return TaskStatus.TEST_UNDER_REVIEW;

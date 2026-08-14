@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:leyu_mobile/core/constants/screen_constants.dart';
 import 'package:leyu_mobile/core/theme/app_colors.dart';
@@ -139,10 +138,12 @@ class _TextToTextWidgetState extends State<TextToTextWidget> {
     final currentLength = _textController.text.trim().length;
 
     if (currentLength == 0) return false;
-    if (task.minCharacters != null && currentLength < task.minCharacters!)
+    if (task.minCharacters != null && currentLength < task.minCharacters!) {
       return false;
-    if (task.maxCharacters != null && currentLength > task.maxCharacters!)
+    }
+    if (task.maxCharacters != null && currentLength > task.maxCharacters!) {
       return false;
+    }
 
     return true;
   }

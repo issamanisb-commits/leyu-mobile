@@ -11,36 +11,41 @@ class TaskRepository {
 
   TaskRepository(this._remoteDataSource);
 
-  Future<Either<Failure, List<Task>>> getMyTasks({int? page , int? pageSize, String? filter}) async {
+  Future<Either<Failure, List<Task>>> getMyTasks(
+      {int? page, int? pageSize, String? filter}) async {
     try {
-      final response = await _remoteDataSource.getMyTasks(page: page??1 , pageSize: pageSize??10, filter: filter);
+      final response = await _remoteDataSource.getMyTasks(
+          page: page ?? 1, pageSize: pageSize ?? 10, filter: filter);
       return Right(response);
-    }
-    on Exception catch (e) {
+    } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }
   }
+
   Future<Either<Failure, TaskDetail>> getTaskDetail(String taskId) async {
     try {
       final response = await _remoteDataSource.getTaskDetail(taskId);
       return Right(response);
-    }
-    on Exception catch (e) {
+    } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }
   }
-  Future<Either<Failure, void>> submitAudioTask(String taskId, int batch, bool isTest, Map<String, File> recordings) async {
+
+  Future<Either<Failure, void>> submitAudioTask(String taskId, int batch,
+      bool isTest, Map<String, File> recordings) async {
     try {
-      await _remoteDataSource.submitAudioTask(taskId, batch,isTest, recordings);
+      await _remoteDataSource.submitAudioTask(
+          taskId, batch, isTest, recordings);
       return const Right(null);
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }
   }
 
-  Future<Either<Failure, void>> submitTextTask(String taskId, int batch, bool isTest, Map<String, String> textOutput) async {
+  Future<Either<Failure, void>> submitTextTask(String taskId, int batch,
+      bool isTest, Map<String, String> textOutput) async {
     try {
-      await _remoteDataSource.submitTextTask(taskId, batch,isTest, textOutput);
+      await _remoteDataSource.submitTextTask(taskId, batch, isTest, textOutput);
       return const Right(null);
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
@@ -57,13 +62,14 @@ class TaskRepository {
     }
   }
 
-  Future<Either<Failure, List<dynamic>>> getSubmissionHistory(String microTaskId) async {
+  Future<Either<Failure, List<dynamic>>> getSubmissionHistory(
+      String microTaskId) async {
     try {
-      final response = await _remoteDataSource.getSubmissionHistory(microTaskId);
+      final response =
+          await _remoteDataSource.getSubmissionHistory(microTaskId);
       return Right(response);
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }
   }
-
 }

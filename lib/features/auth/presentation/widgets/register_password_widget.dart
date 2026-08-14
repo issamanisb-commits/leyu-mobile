@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:leyu_mobile/core/utils/message.dart';
 
 import '../../../../core/utils/screen_size.dart';
 import '../../../../core/widgets/button.dart';
-import '../../../../core/widgets/date_picker.dart';
-import '../../../../core/widgets/dropdown.dart';
 import '../../../../core/widgets/input_box.dart';
 import '../controllers/auth_controller.dart';
 
 class RegisterPasswordWidget extends StatefulWidget {
-  RegisterPasswordWidget({super.key});
+  const RegisterPasswordWidget({super.key});
 
   @override
   State<RegisterPasswordWidget> createState() => _RegisterPasswordWidgetState();
@@ -21,15 +18,18 @@ class _RegisterPasswordWidgetState extends State<RegisterPasswordWidget> {
 
   final formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _confirmPasswordFocusNode = FocusNode();
 
   @override
   void initState() {
-    _passwordController.value = TextEditingValue(text: _authController.password.value ?? '');
-    _confirmPasswordController.value = TextEditingValue(text: _authController.password.value ?? '');
+    _passwordController.value =
+        TextEditingValue(text: _authController.password.value);
+    _confirmPasswordController.value =
+        TextEditingValue(text: _authController.password.value);
     super.initState();
   }
 
@@ -43,7 +43,9 @@ class _RegisterPasswordWidgetState extends State<RegisterPasswordWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: getScreenHeight(context)*0.025,),
+                SizedBox(
+                  height: getScreenHeight(context) * 0.025,
+                ),
                 Row(
                   children: [
                     InkWell(
@@ -58,9 +60,16 @@ class _RegisterPasswordWidgetState extends State<RegisterPasswordWidget> {
                   ],
                 ),
                 SizedBox(height: getScreenHeight(context) * 0.025),
-                Text("auth.profile.password_title".tr,style: const TextStyle(fontSize: 28,fontWeight: FontWeight.w900),),
+                Text(
+                  "auth.profile.password_title".tr,
+                  style: const TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.w900),
+                ),
                 const SizedBox(height: 5),
-                Text("auth.profile.password_subtitle".tr,style: const TextStyle(fontSize: 13,color: Colors.black54),),
+                Text(
+                  "auth.profile.password_subtitle".tr,
+                  style: const TextStyle(fontSize: 13, color: Colors.black54),
+                ),
                 SizedBox(height: getScreenHeight(context) * 0.02),
                 Form(
                   key: formKey,
@@ -75,17 +84,18 @@ class _RegisterPasswordWidgetState extends State<RegisterPasswordWidget> {
                         focusNext: _confirmPasswordFocusNode,
                         showLabel: true,
                       ),
-                      SizedBox(height: getScreenHeight(context)*0.01),
+                      SizedBox(height: getScreenHeight(context) * 0.01),
                       InputBoxWidget(
                         inputType: InputType.confirmPass,
                         label: "auth.profile.confirm_password".tr,
-                        placeHolder: "auth.profile.confirm_password_placeholder".tr,
+                        placeHolder:
+                            "auth.profile.confirm_password_placeholder".tr,
                         controller: _confirmPasswordController,
                         focus: _confirmPasswordFocusNode,
                         pass: _passwordController,
                         showLabel: true,
                       ),
-                      SizedBox(height: getScreenHeight(context)*0.02),
+                      SizedBox(height: getScreenHeight(context) * 0.02),
                     ],
                   ),
                 ),
@@ -94,18 +104,19 @@ class _RegisterPasswordWidgetState extends State<RegisterPasswordWidget> {
           ),
         ),
         Obx(() => ButtonWidget(
-          text: "auth.profile.create_button".tr,
-          loadingText: "auth.profile.create_loading".tr,
-          fontSize: 16,
-          isLoading: _authController.isRegistering.value,
-          onPressed: () {
-            if (formKey.currentState!.validate()) {
-              _authController.password.value = _passwordController.text.trim();
-              _authController.registerProfile();
-            }
-          },
-        )),
-        SizedBox(height: getScreenHeight(context)*0.025),
+              text: "auth.profile.create_button".tr,
+              loadingText: "auth.profile.create_loading".tr,
+              fontSize: 16,
+              isLoading: _authController.isRegistering.value,
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  _authController.password.value =
+                      _passwordController.text.trim();
+                  _authController.registerProfile();
+                }
+              },
+            )),
+        SizedBox(height: getScreenHeight(context) * 0.025),
       ],
     );
   }

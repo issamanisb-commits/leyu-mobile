@@ -51,7 +51,7 @@ class SubmissionHistoryBottomSheet extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
@@ -181,15 +181,15 @@ class SubmissionHistoryBottomSheet extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: submission.status == 'Rejected'
-              ? AppColors.red.withOpacity(0.3)
+              ? AppColors.red.withValues(alpha: 0.3)
               : submission.status == 'Approved'
-                  ? Colors.green.withOpacity(0.3)
-                  : Colors.grey.withOpacity(0.2),
+                  ? Colors.green.withValues(alpha: 0.3)
+                  : Colors.grey.withValues(alpha: 0.2),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -202,7 +202,7 @@ class SubmissionHistoryBottomSheet extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: _getStatusColor(submission.status).withOpacity(0.05),
+              color: _getStatusColor(submission.status).withValues(alpha: 0.05),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
@@ -219,7 +219,7 @@ class SubmissionHistoryBottomSheet extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.1),
+                            color: AppColors.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
@@ -308,7 +308,7 @@ class SubmissionHistoryBottomSheet extends StatelessWidget {
                       color: Colors.red.shade50,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: AppColors.red.withOpacity(0.2),
+                        color: AppColors.red.withValues(alpha: 0.2),
                         width: 1,
                       ),
                     ),
@@ -317,7 +317,7 @@ class SubmissionHistoryBottomSheet extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.error_outline_rounded,
                               size: 18,
                               color: AppColors.red,
@@ -347,7 +347,7 @@ class SubmissionHistoryBottomSheet extends StatelessWidget {
                                         margin: const EdgeInsets.only(top: 6),
                                         width: 6,
                                         height: 6,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: AppColors.red,
                                           shape: BoxShape.circle,
                                         ),

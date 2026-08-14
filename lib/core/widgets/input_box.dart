@@ -1,18 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:leyu_mobile/core/theme/app_colors.dart';
 import 'package:leyu_mobile/core/widgets/image.dart';
 
-import '../utils/screen_size.dart';
+enum InputType { text, password, email, confirmPass, money, number, other }
 
-enum InputType{
-  text,password,email,confirmPass,money,number,other
-}
-
-String? validateInput(String? value,String label,{bool shouldValidate = true}) {
-  if(!shouldValidate){
+String? validateInput(String? value, String label,
+    {bool shouldValidate = true}) {
+  if (!shouldValidate) {
     return null;
   }
   if (value == null || value.isEmpty || value.isBlank!) {
@@ -21,11 +16,12 @@ String? validateInput(String? value,String label,{bool shouldValidate = true}) {
   return null;
 }
 
-String? validatePassword(String? value,String label , {bool shouldValidate = true}) {
+String? validatePassword(String? value, String label,
+    {bool shouldValidate = true}) {
   if (value == null || value.isEmpty || value.isBlank!) {
     return 'validation.field_required'.trParams({'field': label});
   }
-  if(shouldValidate && value.length < 8) {
+  if (shouldValidate && value.length < 8) {
     return 'validation.password_min_8'.trParams({'field': label});
   }
   if (shouldValidate && !RegExp(r'^(?=.*[A-Z])').hasMatch(value)) {
@@ -37,34 +33,36 @@ String? validatePassword(String? value,String label , {bool shouldValidate = tru
   if (shouldValidate && !RegExp(r'^(?=.*[0-9])').hasMatch(value)) {
     return 'validation.password_number'.trParams({'field': label});
   }
-  if (shouldValidate && !RegExp(r'^(?=.*[!@#$%^&*()_+{}:"<>?])').hasMatch(value)) {
+  if (shouldValidate &&
+      !RegExp(r'^(?=.*[!@#$%^&*()_+{}:"<>?])').hasMatch(value)) {
     return 'validation.password_special'.trParams({'field': label});
   }
   return null;
 }
 
-String? validateConfirmPass(String? value ,String label, TextEditingController pass) {
-  if (value == null || value.isEmpty|| value.isBlank!) {
+String? validateConfirmPass(
+    String? value, String label, TextEditingController pass) {
+  if (value == null || value.isEmpty || value.isBlank!) {
     return 'validation.confirm_password_required'.tr;
   }
-  if(value != pass.text){
+  if (value != pass.text) {
     return 'validation.passwords_not_match'.tr;
   }
   return null;
 }
 
 String? validatePhone(String? value) {
-  if (value == null || value.isEmpty|| value.isBlank!) {
+  if (value == null || value.isEmpty || value.isBlank!) {
     return 'validation.phone_required'.tr;
   }
 
-  final phoneRegex = RegExp(r'^[0-9]{9}$'); // Phone number format: +251 followed by 9 additional digits
+  final phoneRegex = RegExp(
+      r'^[0-9]{9}$'); // Phone number format: +251 followed by 9 additional digits
 
   if (!phoneRegex.hasMatch(value)) {
     if (value.length != 9) {
       return 'validation.phone_9_digits'.tr;
-    }
-    else {
+    } else {
       return 'validation.phone_format_incorrect'.tr;
     }
   }
@@ -72,7 +70,7 @@ String? validatePhone(String? value) {
   return null;
 }
 
-String? validateEmail(String? value){
+String? validateEmail(String? value) {
   if (value == null || value.isEmpty || value.isBlank!) {
     return null;
   }
@@ -119,7 +117,8 @@ class InputBoxWidget extends StatefulWidget {
   bool shouldValidate;
   bool enabled;
 
-  InputBoxWidget({super.key,
+  InputBoxWidget({
+    super.key,
     required this.inputType,
     required this.label,
     required this.controller,
@@ -143,12 +142,12 @@ class InputBoxWidget extends StatefulWidget {
 }
 
 class _InputBoxWidgetState extends State<InputBoxWidget> {
-
   bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    final isPasswordField = widget.inputType == InputType.password || widget.inputType == InputType.confirmPass;
+    final isPasswordField = widget.inputType == InputType.password ||
+        widget.inputType == InputType.confirmPass;
 
     return Container(
       padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 5),
@@ -157,17 +156,21 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
         children: [
           widget.showLabel
               ? Padding(
-                  padding: const EdgeInsets.only(left: 8.0,bottom: 3.0),
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 3.0),
                   child: Row(
                     children: [
                       Text(
                         widget.label,
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       !widget.isOptional
                           ? const Text(
                               " *",
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.red),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: AppColors.red),
                             )
                           : Container(),
                     ],
@@ -187,7 +190,8 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
             onFieldSubmitted: (value) {
               if (widget.focusNext != null) {
                 FocusScope.of(context).requestFocus(widget.focusNext);
-                Scrollable.ensureVisible(widget.focusNext!.context!, alignment: 0.5);
+                Scrollable.ensureVisible(widget.focusNext!.context!,
+                    alignment: 0.5);
               } else {
                 FocusScope.of(context).unfocus();
                 widget.onEnter?.call();
@@ -197,20 +201,25 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColors.inputBgColor,
-              hintText: widget.placeHolder ?? 'validation.enter_field'.trParams({'field': widget.label}),
+              hintText: widget.placeHolder ??
+                  'validation.enter_field'.trParams({'field': widget.label}),
               hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
-              errorStyle: const TextStyle(fontSize:10, color: AppColors.red),
+              errorStyle: const TextStyle(fontSize: 10, color: AppColors.red),
               suffixIcon: isPasswordField
                   ? IconButton(
-                icon: Icon(
-                  size: 20,
-                  isPasswordVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-                  color: const Color(0xFF79747E),
-                ),
-                onPressed: () => setState(() => isPasswordVisible = !isPasswordVisible),
-              )
+                      icon: Icon(
+                        size: 20,
+                        isPasswordVisible
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        color: const Color(0xFF79747E),
+                      ),
+                      onPressed: () => setState(
+                          () => isPasswordVisible = !isPasswordVisible),
+                    )
                   : null,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: AppColors.primary),
                 borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -236,20 +245,6 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
     );
   }
 
-  IconData _getIconData(InputType type) {
-    switch (type) {
-      case InputType.password:
-      case InputType.confirmPass:
-        return Icons.lock_outline;
-      case InputType.money:
-        return Icons.monetization_on_outlined;
-      case InputType.number:
-        return Icons.numbers;
-      case InputType.other:
-      default:
-        return Icons.library_add_check_outlined;
-    }
-  }
 
   TextInputType _getKeyboardType(InputType type) {
     switch (type) {
@@ -264,9 +259,13 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
   String? _getValidator(InputType type, String? value) {
     switch (type) {
       case InputType.text:
-        return widget.isOptional ? null : validateInput(value, widget.label,shouldValidate: widget.shouldValidate);
+        return widget.isOptional
+            ? null
+            : validateInput(value, widget.label,
+                shouldValidate: widget.shouldValidate);
       case InputType.password:
-        return validatePassword(value, widget.label , shouldValidate: widget.shouldValidate);
+        return validatePassword(value, widget.label,
+            shouldValidate: widget.shouldValidate);
       case InputType.confirmPass:
         return validateConfirmPass(value, "Confirm Password", widget.pass!);
       case InputType.email:
@@ -278,10 +277,7 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
         return widget.isOptional ? null : validateInput(value, widget.label);
     }
   }
-
-
 }
-
 
 class SearchInputBoxWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -298,8 +294,8 @@ class SearchInputBoxWidget extends StatelessWidget {
     required this.onChange,
     this.height = 50,
     this.radius = 70,
-    this.label = "Search",});
-
+    this.label = "Search",
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -310,7 +306,7 @@ class SearchInputBoxWidget extends StatelessWidget {
           height: height,
           margin: const EdgeInsets.only(top: 0),
           child: ClipRRect(
-            child:TextFormField(
+            child: TextFormField(
               keyboardType: TextInputType.text,
               controller: controller,
               focusNode: focusNode,
@@ -325,14 +321,17 @@ class SearchInputBoxWidget extends StatelessWidget {
                 fillColor: Colors.white,
                 hintText: label,
                 hintStyle: const TextStyle(color: Colors.grey),
-                prefixIcon: const Icon(Icons.search,color: Colors.black,),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
                 contentPadding: const EdgeInsets.only(left: 20),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: AppColors.primary),
                   borderRadius: BorderRadius.circular(radius),
                 ),
                 enabledBorder: OutlineInputBorder(
-                    borderSide:  const BorderSide(color: AppColors.primary),
+                    borderSide: const BorderSide(color: AppColors.primary),
                     borderRadius: BorderRadius.circular(radius)),
                 border: InputBorder.none,
               ),
@@ -376,25 +375,36 @@ class PhoneInputBoxWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        showLabel?Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: Row(
-              children: [
-                Text(label, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                const Text(" *", style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.red),)
-              ],
-            ),
-          ),):Container(),
-        showLabel?const SizedBox(height: 3):Container(),
+        showLabel
+            ? Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Row(
+                    children: [
+                      Text(label,
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                      const Text(
+                        " *",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.red),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            : Container(),
+        showLabel ? const SizedBox(height: 3) : Container(),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: height,
-              padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
               margin: const EdgeInsets.only(right: 7.5),
               decoration: BoxDecoration(
                 color: AppColors.inputBgColor,
@@ -403,8 +413,9 @@ class PhoneInputBoxWidget extends StatelessWidget {
               child: Center(
                 child: Row(
                   children: [
-                    assetSvgImageWidget("eth-flag.svg",width: 16,height: 16,fit: BoxFit.scaleDown),
-                    const SizedBox(width:10),
+                    assetSvgImageWidget("eth-flag.svg",
+                        width: 16, height: 16, fit: BoxFit.scaleDown),
+                    const SizedBox(width: 10),
                     const Text(
                       "+251",
                       style: TextStyle(fontSize: 15),
@@ -429,7 +440,8 @@ class PhoneInputBoxWidget extends StatelessWidget {
                 onFieldSubmitted: (value) {
                   if (focusNext != null) {
                     FocusScope.of(context).requestFocus(focusNext);
-                    Scrollable.ensureVisible(focusNext!.context!, alignment: 0.5);
+                    Scrollable.ensureVisible(focusNext!.context!,
+                        alignment: 0.5);
                   } else {
                     FocusScope.of(context).unfocus();
                   }

@@ -23,6 +23,7 @@ class ProfileBinding extends Bindings {
     Get.lazyPut<ProfileRepository>(() => ProfileRepositoryImpl(Get.find()));
     Get.lazyPut(() => ProfileUseCase(Get.find<ProfileRepository>()));
 
-    Get.lazyPut<ProfileController>(() => ProfileController(Get.find<LocalStorage>(), Get.find<ProfileUseCase>()));
+    Get.lazyPut<ProfileController>(() => ProfileController(
+        Get.find<LocalStorage>(), Get.find<ProfileUseCase>()));
   }
 }

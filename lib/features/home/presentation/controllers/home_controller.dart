@@ -1,3 +1,4 @@
+import '../../data/services/offline_sync_service.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:leyu_mobile/core/cache/cache_manager.dart';
 import 'package:leyu_mobile/core/utils/message.dart';
 import 'package:leyu_mobile/core/utils/storage_logger.dart';
 import 'package:leyu_mobile/core/utils/storage_error_handler.dart';
-import 'package:leyu_mobile/features/home/data/models/task_detail.dart';
 import 'package:leyu_mobile/features/home/domain/entities/task_detail_entity.dart';
 import 'package:leyu_mobile/features/home/domain/entities/task_entity.dart';
 import 'package:leyu_mobile/features/home/presentation/widgets/submission_history_bottom_sheet.dart';
@@ -26,6 +26,7 @@ class HomeController extends GetxController {
   final FileStorageService _fileStorageService;
   final NotificationUsecase _notificationUsecase;
   final ProfileUseCase _profileUseCase;
+  final OfflineSyncService _offlineSyncService;
 
   HomeController(
     this._localStorage,
@@ -34,6 +35,7 @@ class HomeController extends GetxController {
     this._fileStorageService,
     this._notificationUsecase,
     this._profileUseCase,
+    this._offlineSyncService,
   );
 
   RxString userFirstName = "".obs;
@@ -60,6 +62,7 @@ class HomeController extends GetxController {
   RxBool hasReadInstructions = false.obs;
   RxBool hasStartedTest = false.obs;
   RxBool isSubmittingTask = false.obs;
+  RxInt pendingSubmissionCount = 0.obs;
   RxBool showShowRecordingOnBoarding = true.obs;
 
   Map<String, File> recordedAudioFiles = {};
@@ -69,12 +72,39 @@ class HomeController extends GetxController {
   String? _currentLoadingTaskId;
 
   @override
+  
+  void triggerManualSync() {
+    Get.snackbar(
+      'Syncing...',
+      'Attempting to upload pending offline tasks.',
+      snackPosition: SnackPosition.BOTTOM,
+    );
+    _offlineSyncService.syncPendingTasks(uploadEndpoint: '/tasks/submit');
+  }
+
+  void refreshPendingCount() async {
+    final submissions = await _taskStorageService.getAllSubmissions();
+    pendingSubmissionCount.value = submissions.length;
+  }
+
+  @override
   void onInit() {
     _initializeStorage();
     fetchUserBalance();
     fetchTasks();
     fetchNotificationCount();
     _refreshUserProfile();
+
+    _offlineSyncService.onSyncCompleted = (count) {
+      Get.snackbar(
+        'Sync Complete',
+        'Successfully uploaded $count pending submission${count > 1 ? "s" : ""}.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      refreshPendingCount();
+    };
+    _offlineSyncService.syncPendingTasks(uploadEndpoint: '/tasks/submit');
+    refreshPendingCount();
     super.onInit();
   }
 

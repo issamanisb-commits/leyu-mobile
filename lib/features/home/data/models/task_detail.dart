@@ -31,7 +31,9 @@ class TaskDetail {
     print(json['minimum_seconds']);
     return TaskDetail(
       isTest: json['is_test'] as bool? ?? false,
-      testStatus: json['has_passed'] != null ? getTestStatus(json['has_passed'] as String? ?? 'APPROVED') : TestStatus.Passed,
+      testStatus: json['has_passed'] != null
+          ? getTestStatus(json['has_passed'] as String? ?? 'APPROVED')
+          : TestStatus.Passed,
       batch: json['batch'] as int? ?? 0,
       task: Task.fromJson(json),
       microTasks: (json['contributorMicroTask'] as List<dynamic>?)
@@ -40,7 +42,7 @@ class TaskDetail {
           [],
       taskInstruction: json['taskInstruction'] != null
           ? TaskInstruction.fromJson(
-          json['taskInstruction'] as Map<String, dynamic>)
+              json['taskInstruction'] as Map<String, dynamic>)
           : null,
       minSeconds: json['minimum_seconds'] as int?,
       maxSeconds: json['maximum_seconds'] as int?,
@@ -65,12 +67,13 @@ TestStatus getTestStatus(String status) {
   }
 }
 
-enum TestStatus{
+enum TestStatus {
   Not_Taken,
   Under_Review,
   Passed,
   Failed,
 }
+
 class TaskInstruction {
   String title;
   String content;
