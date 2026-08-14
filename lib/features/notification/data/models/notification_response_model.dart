@@ -16,17 +16,31 @@ class NotificationResponseModel {
   });
 
   factory NotificationResponseModel.fromJson(Map<String, dynamic> json) {
-    final data = json['data'];
-    final result = data['result'] as List<dynamic>? ?? [];
+    final rawNotifications =
+        json['notifications'] ?? json['items'] ?? json['data'] ?? [];
+
+    final result = rawNotifications is List ? rawNotifications : <dynamic>[];
 
     return NotificationResponseModel(
       notifications: result
-          .map((item) => NotificationModel.fromJson(item as Map<String, dynamic>))
+          .whereType<Map<String, dynamic>>()
+          .map(NotificationModel.fromJson)
           .toList(),
-      total: data['total'] ?? 0,
-      page: data['page'] ?? 1,
-      limit: data['limit'] ?? 10,
-      totalPages: data['totalPages'] ?? 0,
+      total: json['total'] as int? ?? 0,
+      page: json['page'] as int? ?? 1,
+      limit: json['limit'] as int? ?? 10,
+      totalPages: _calculateTotalPages(
+        json['total'] as int? ?? 0,
+        json['limit'] as int? ?? 10,
+      ),
     );
+  }
+
+  static int _calculateTotalPages(int total, int limit) {
+    if (limit <= 0 || total <= 0) {
+      return 0;
+    }
+
+    return (total + limit - 1) ~/ limit;
   }
 }

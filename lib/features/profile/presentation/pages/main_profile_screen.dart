@@ -27,7 +27,7 @@ class MainProfileScreen extends StatelessWidget {
 
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 15, bottom:40),
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -48,7 +48,6 @@ class MainProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 20),
-
         ],
       ),
     );

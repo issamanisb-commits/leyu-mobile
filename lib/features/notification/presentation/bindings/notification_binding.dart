@@ -15,7 +15,8 @@ class NotificationBinding extends Bindings {
     Get.lazyPut(() => NotificationRemoteDataSource(Get.find<ApiClient>()));
 
     // Register NotificationRepository
-    Get.lazyPut(() => NotificationRepository(Get.find<NotificationRemoteDataSource>()));
+    Get.lazyPut(
+        () => NotificationRepository(Get.find<NotificationRemoteDataSource>()));
 
     // Register NotificationUsecase
     Get.lazyPut(() => NotificationUsecase(Get.find<NotificationRepository>()));

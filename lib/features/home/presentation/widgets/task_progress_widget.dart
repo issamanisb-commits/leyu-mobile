@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:leyu_mobile/core/utils/screen_size.dart';
 import 'package:leyu_mobile/features/home/presentation/controllers/home_controller.dart';
 import 'package:leyu_mobile/features/home/domain/entities/micro_task_status_enum.dart';
 
@@ -37,11 +36,14 @@ class TaskProgressWidget extends StatelessWidget {
     });
   }
 
-  Widget _singleSubTaskProgress(int index, int currentSubtaskIndex, int totalSubTasks, BuildContext context) {
+  Widget _singleSubTaskProgress(int index, int currentSubtaskIndex,
+      int totalSubTasks, BuildContext context) {
     final HomeController controller = Get.find<HomeController>();
     final microTask = controller.selectedTaskDetail.value?.microTasks[index];
     final status = microTask?.acceptanceStatus ?? MicroTaskStatus.NOT_STARTED;
-    final hasSubmitted = controller.recordedAudioFiles.containsKey(microTask?.id ?? '') || controller.savedTextOutputs.containsKey(microTask?.id ?? '');
+    final hasSubmitted =
+        controller.recordedAudioFiles.containsKey(microTask?.id ?? '') ||
+            controller.savedTextOutputs.containsKey(microTask?.id ?? '');
 
     Color statusColor = _getStatusColor(status, hasSubmitted);
 
@@ -49,7 +51,11 @@ class TaskProgressWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: index == currentSubtaskIndex ? status == MicroTaskStatus.NOT_STARTED?AppColors.primary.withOpacity(0.4) : statusColor.withOpacity(0.4) : statusColor,
+          color: index == currentSubtaskIndex
+              ? status == MicroTaskStatus.NOT_STARTED
+                  ? AppColors.primary.withValues(alpha: 0.4)
+                  : statusColor.withValues(alpha: 0.4)
+              : statusColor,
         ),
         margin: const EdgeInsets.symmetric(horizontal: 1),
         height: 10,
@@ -57,8 +63,8 @@ class TaskProgressWidget extends StatelessWidget {
     );
   }
 
-  Color _getStatusColor(MicroTaskStatus status , bool hasSubmitted) {
-    if(hasSubmitted && status == MicroTaskStatus.NOT_STARTED){
+  Color _getStatusColor(MicroTaskStatus status, bool hasSubmitted) {
+    if (hasSubmitted && status == MicroTaskStatus.NOT_STARTED) {
       return AppColors.primary;
     }
     switch (status) {
@@ -69,7 +75,8 @@ class TaskProgressWidget extends StatelessWidget {
       case MicroTaskStatus.APPROVED:
         return AppColors.green;
       case MicroTaskStatus.UNDER_REVIEW:
-        return AppColors.yellow; // Orange-like color (using yellow from app colors)
+        return AppColors
+            .yellow; // Orange-like color (using yellow from app colors)
     }
   }
 

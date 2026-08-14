@@ -13,7 +13,8 @@ class LocalizationController extends GetxController {
   Locale get locale => _locale.value;
 
   /// Get list of supported locales
-  static const List<LocaleModel> supportedLocales = LocaleModel.supportedLocales;
+  static const List<LocaleModel> supportedLocales =
+      LocaleModel.supportedLocales;
 
   /// Initialize localization controller
   /// Loads saved locale or uses device locale

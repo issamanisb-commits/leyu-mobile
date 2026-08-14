@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:leyu_mobile/core/theme/app_colors.dart';
-import 'package:leyu_mobile/core/utils/screen_size.dart';
 
 class HorizontalCarouselWidget extends StatefulWidget {
   final List<Widget> items;
@@ -11,7 +10,8 @@ class HorizontalCarouselWidget extends StatefulWidget {
   });
 
   @override
-  _HorizontalCarouselWidgetState createState() => _HorizontalCarouselWidgetState();
+  _HorizontalCarouselWidgetState createState() =>
+      _HorizontalCarouselWidgetState();
 }
 
 class _HorizontalCarouselWidgetState extends State<HorizontalCarouselWidget> {
@@ -89,7 +89,9 @@ class BottomIndicator extends StatelessWidget {
               width: index == currentIndex ? 24.0 : 8.0,
               height: 8.0,
               decoration: BoxDecoration(
-                color: index == currentIndex ? AppColors.primary : const Color(0xFFD9D9D9),
+                color: index == currentIndex
+                    ? AppColors.primary
+                    : const Color(0xFFD9D9D9),
                 borderRadius: BorderRadius.circular(4.0),
               ),
             ),

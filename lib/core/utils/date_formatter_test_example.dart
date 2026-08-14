@@ -14,7 +14,8 @@ void testDateFormatting() {
 
   print('\n=== Number Formatting Examples ===');
   print('formatNumber(1234567.89): ${formatNumber(1234567.89)}');
-  print('formatCurrency(1500.50, currencySymbol: "ETB"): ${formatCurrency(1500.50, currencySymbol: "ETB")}');
+  print(
+      'formatCurrency(1500.50, currencySymbol: "ETB"): ${formatCurrency(1500.50, currencySymbol: "ETB")}');
   print('formatPercentage(0.75): ${formatPercentage(0.75)}');
 
   print('\n=== Edge Cases ===');

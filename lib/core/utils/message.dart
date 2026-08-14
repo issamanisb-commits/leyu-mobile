@@ -1,9 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:leyu_mobile/core/theme/app_colors.dart';
-
 
 Future<void> showSuccessMessage(String message) async {
   Get.snackbar(
@@ -28,7 +26,6 @@ void showErrorMessage(String message) {
     duration: const Duration(seconds: 3),
   );
 }
-
 
 void showInternetConnectionError() {
   Flushbar(

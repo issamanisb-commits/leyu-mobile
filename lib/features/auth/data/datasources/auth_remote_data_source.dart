@@ -110,7 +110,7 @@ class AuthRemoteDataSource {
 
   Future<void> verifyOtp(String phoneNumber, String otp) async {
     try {
-      final response = await _apiClient.post('/iam/auth/verify-otp', data: {
+      await _apiClient.post('/iam/auth/verify-otp', data: {
         'username': phoneNumber,
         'code': otp,
       });
@@ -122,7 +122,7 @@ class AuthRemoteDataSource {
   Future<void> resetPassword(
       String phone, String otp, String newPassword) async {
     try {
-      final response = await _apiClient.post('/iam/auth/reset-password', data: {
+      await _apiClient.post('/iam/auth/reset-password', data: {
         'username': phone,
         'code': otp,
         'password': newPassword,

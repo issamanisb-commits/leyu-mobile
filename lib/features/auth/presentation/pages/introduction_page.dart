@@ -39,7 +39,7 @@ class IntroductionPage extends StatelessWidget {
                   const Align(
                     alignment: AlignmentGeometry.centerRight,
                     child: Padding(
-                      padding: EdgeInsets.only(right: 8.0,top: 15,bottom: 20),
+                      padding: EdgeInsets.only(right: 8.0, top: 15, bottom: 20),
                       child: LanguageChanger(),
                     ),
                   ),
@@ -63,10 +63,10 @@ class IntroductionPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: getScreenHeight(context) * 0.03),
-              
+
                         // Page indicators
                         _buildPageIndicators(context),
-              
+
                         SizedBox(height: getScreenHeight(context) * 0.075),
                       ],
                     ),

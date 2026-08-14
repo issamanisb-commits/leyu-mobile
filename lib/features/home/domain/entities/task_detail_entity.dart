@@ -1,10 +1,7 @@
-import 'package:leyu_mobile/features/home/data/models/task.dart';
 import 'package:leyu_mobile/features/home/domain/entities/task_entity.dart';
 
-import '../../data/models/micro_task.dart';
 import '../../data/models/task_detail.dart';
 import 'micro_task_entity.dart';
-import 'micro_task_status_enum.dart';
 
 class TaskDetailEntity {
   final bool isTest;
@@ -33,7 +30,8 @@ class TaskDetailEntity {
 
   static TaskDetailEntity fromModel(TaskDetail model) {
     // Map microTasks to MicroTaskEntity
-    var microTasks = model.microTasks.map((e) => MicroTaskEntity.fromModel(e)).toList();
+    var microTasks =
+        model.microTasks.map((e) => MicroTaskEntity.fromModel(e)).toList();
 
     // // Sort microTasks by acceptanceStatus: APPROVED, UNDER_REVIEW, REJECTED, NOT_STARTED
     // microTasks.sort((a, b) {

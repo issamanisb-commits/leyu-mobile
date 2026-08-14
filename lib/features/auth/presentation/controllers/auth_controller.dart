@@ -205,14 +205,14 @@ class AuthController extends GetxController {
   Future<void> getLanguages() async {
     isLoadingLanguages.value = true;
     final result = await _baseDataUseCase.getLanguages();
-    languages.value = Set.from(result);
+    languages.assignAll(result);
     isLoadingLanguages.value = false;
   }
 
   Future<void> getDialects(String languageId) async {
     isLoadingDialects.value = true;
     final result = await _baseDataUseCase.getDialects(languageId);
-    dialects.value = Set.from(result);
+    dialects.assignAll(result);
     isLoadingDialects.value = false;
   }
 

@@ -53,7 +53,7 @@ class ChatbotPage extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
-      shadowColor: Colors.black.withOpacity(0.05),
+      shadowColor: Colors.black.withValues(alpha: 0.05),
       leading: IconButton(
         icon: Container(
           padding: const EdgeInsets.all(8),
@@ -80,7 +80,7 @@ class ChatbotPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(0.3),
+                  color: AppColors.primary.withValues(alpha: 0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),
@@ -106,7 +106,7 @@ class ChatbotPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.green.withOpacity(0.8),
+                  color: AppColors.green.withValues(alpha: 0.8),
                 ),
               ),
             ],
@@ -123,7 +123,7 @@ class ChatbotPage extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -148,7 +148,7 @@ class ChatbotPage extends StatelessWidget {
                   controller: controller.messageController,
                   decoration: InputDecoration(
                     hintText: 'chatbot.input_hint'.tr,
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: AppColors.grayText,
                       fontSize: 15,
                     ),
@@ -186,14 +186,14 @@ class ChatbotPage extends StatelessWidget {
                               end: Alignment.bottomRight,
                             ),
                       color: controller.isLoading.value
-                          ? AppColors.gray.withOpacity(0.3)
+                          ? AppColors.gray.withValues(alpha: 0.3)
                           : null,
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: controller.isLoading.value
                           ? null
                           : [
                               BoxShadow(
-                                color: AppColors.primary.withOpacity(0.3),
+                                color: AppColors.primary.withValues(alpha: 0.3),
                                 blurRadius: 8,
                                 offset: const Offset(0, 2),
                               ),

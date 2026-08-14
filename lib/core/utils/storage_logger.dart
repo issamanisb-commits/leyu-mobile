@@ -27,16 +27,22 @@ class StorageLogger {
     _logger.i('Saved audio recording: task=$taskId, microtask=$microTaskId');
   }
 
-  static void logAudioRecordingSaveError(String taskId, String microTaskId, dynamic error) {
-    _logger.e('Failed to save audio recording: task=$taskId, microtask=$microTaskId', error: error);
+  static void logAudioRecordingSaveError(
+      String taskId, String microTaskId, dynamic error) {
+    _logger.e(
+        'Failed to save audio recording: task=$taskId, microtask=$microTaskId',
+        error: error);
   }
 
   static void logTextOutputSaved(String taskId, String microTaskId) {
     _logger.i('Saved text output: task=$taskId, microtask=$microTaskId');
   }
 
-  static void logTextOutputSaveError(String taskId, String microTaskId, dynamic error) {
-    _logger.e('Failed to save text output: task=$taskId, microtask=$microTaskId', error: error);
+  static void logTextOutputSaveError(
+      String taskId, String microTaskId, dynamic error) {
+    _logger.e(
+        'Failed to save text output: task=$taskId, microtask=$microTaskId',
+        error: error);
   }
 
   static void logSubmissionRetrieved(String taskId, bool found) {
@@ -55,16 +61,22 @@ class StorageLogger {
     _logger.i('Deleted audio recording: task=$taskId, microtask=$microTaskId');
   }
 
-  static void logAudioRecordingDeleteError(String taskId, String microTaskId, dynamic error) {
-    _logger.e('Failed to delete audio recording: task=$taskId, microtask=$microTaskId', error: error);
+  static void logAudioRecordingDeleteError(
+      String taskId, String microTaskId, dynamic error) {
+    _logger.e(
+        'Failed to delete audio recording: task=$taskId, microtask=$microTaskId',
+        error: error);
   }
 
   static void logTextOutputDeleted(String taskId, String microTaskId) {
     _logger.i('Deleted text output: task=$taskId, microtask=$microTaskId');
   }
 
-  static void logTextOutputDeleteError(String taskId, String microTaskId, dynamic error) {
-    _logger.e('Failed to delete text output: task=$taskId, microtask=$microTaskId', error: error);
+  static void logTextOutputDeleteError(
+      String taskId, String microTaskId, dynamic error) {
+    _logger.e(
+        'Failed to delete text output: task=$taskId, microtask=$microTaskId',
+        error: error);
   }
 
   static void logTaskSubmissionDeleted(String taskId) {
@@ -76,7 +88,8 @@ class StorageLogger {
   }
 
   static void logCleanupStarted(int entryCount) {
-    _logger.i('Starting cleanup of invalid entries: $entryCount tasks to check');
+    _logger
+        .i('Starting cleanup of invalid entries: $entryCount tasks to check');
   }
 
   static void logCleanupCompleted(int cleanedCount) {
@@ -112,12 +125,16 @@ class StorageLogger {
     _logger.e('Failed to create task directory: task=$taskId', error: error);
   }
 
-  static void logAudioFileSaved(String taskId, String microTaskId, String path) {
-    _logger.i('Audio file saved: task=$taskId, microtask=$microTaskId, path=$path');
+  static void logAudioFileSaved(
+      String taskId, String microTaskId, String path) {
+    _logger.i(
+        'Audio file saved: task=$taskId, microtask=$microTaskId, path=$path');
   }
 
-  static void logAudioFileSaveError(String taskId, String microTaskId, dynamic error) {
-    _logger.e('Failed to save audio file: task=$taskId, microtask=$microTaskId', error: error);
+  static void logAudioFileSaveError(
+      String taskId, String microTaskId, dynamic error) {
+    _logger.e('Failed to save audio file: task=$taskId, microtask=$microTaskId',
+        error: error);
   }
 
   static void logAudioFileDeleted(String path) {
@@ -170,23 +187,29 @@ class StorageLogger {
   }
 
   static void logStorageInitError(dynamic error) {
-    _logger.e('Failed to initialize storage services, falling back to in-memory storage', error: error);
+    _logger.e(
+        'Failed to initialize storage services, falling back to in-memory storage',
+        error: error);
   }
 
   static void logTaskSubmissionsLoadStarted(String taskId) {
     _logger.d('Loading task submissions: task=$taskId');
   }
 
-  static void logTaskSubmissionsLoaded(String taskId, int audioCount, int textCount) {
-    _logger.i('Loaded submissions: task=$taskId, audio=$audioCount, text=$textCount');
+  static void logTaskSubmissionsLoaded(
+      String taskId, int audioCount, int textCount) {
+    _logger.i(
+        'Loaded submissions: task=$taskId, audio=$audioCount, text=$textCount');
   }
 
   static void logTaskSubmissionsLoadError(String taskId, dynamic error) {
     _logger.e('Failed to load task submissions: task=$taskId', error: error);
   }
 
-  static void logInvalidFilePathRemoved(String taskId, String microTaskId, String path) {
-    _logger.w('Removed invalid file path: task=$taskId, microtask=$microTaskId, path=$path');
+  static void logInvalidFilePathRemoved(
+      String taskId, String microTaskId, String path) {
+    _logger.w(
+        'Removed invalid file path: task=$taskId, microtask=$microTaskId, path=$path');
   }
 
   static void logAudioPersistStarted(String microTaskId) {
@@ -198,7 +221,8 @@ class StorageLogger {
   }
 
   static void logAudioPersistError(String microTaskId, dynamic error) {
-    _logger.e('Failed to persist audio recording: microtask=$microTaskId', error: error);
+    _logger.e('Failed to persist audio recording: microtask=$microTaskId',
+        error: error);
   }
 
   static void logTextPersistStarted(String microTaskId) {
@@ -210,7 +234,8 @@ class StorageLogger {
   }
 
   static void logTextPersistError(String microTaskId, dynamic error) {
-    _logger.e('Failed to persist text output: microtask=$microTaskId', error: error);
+    _logger.e('Failed to persist text output: microtask=$microTaskId',
+        error: error);
   }
 
   static void logStorageCleanupStarted(String taskId) {

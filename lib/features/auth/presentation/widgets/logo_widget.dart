@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../../core/utils/screen_size.dart';
 import '../../../../../core/widgets/image.dart';
-
 
 class LogoWidget extends StatelessWidget {
   const LogoWidget({super.key});
@@ -13,10 +11,12 @@ class LogoWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top: getScreenHeight(context)*0.02),
+          margin: EdgeInsets.only(top: getScreenHeight(context) * 0.02),
           child: Center(
-            child: assetImageWidget("logo.png",scale: 2.5,)
-          ),
+              child: assetImageWidget(
+            "logo.png",
+            scale: 2.5,
+          )),
         ),
       ],
     );

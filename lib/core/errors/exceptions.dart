@@ -38,7 +38,3 @@ class CacheException implements Exception {
   CacheException(this.message);
 }
 
-_mapDioErrorToFailure(Exception e){
-
-}
-

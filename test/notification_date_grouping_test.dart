@@ -1,7 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:leyu_mobile/features/notification/data/models/notification_model.dart';
 import 'package:leyu_mobile/features/notification/domain/entities/notification_entity.dart';
-import 'package:leyu_mobile/features/notification/domain/usecases/notification_usecase.dart';
 
 void main() {
   group('Notification Date Formatting and Grouping', () {
@@ -53,7 +51,8 @@ void main() {
       expect(notification.getDateCategory(), 'Today');
     });
 
-    test('getDateCategory() returns "Yesterday" for yesterday\'s notification', () {
+    test('getDateCategory() returns "Yesterday" for yesterday\'s notification',
+        () {
       final yesterday = DateTime.now().subtract(const Duration(days: 1));
       final notification = NotificationEntity(
         id: '1',

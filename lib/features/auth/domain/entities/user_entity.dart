@@ -33,7 +33,7 @@ class UserEntity {
     this.approvedDatasetCount,
   });
 
-  static UserEntity fromModel(User user){
+  static UserEntity fromModel(User user) {
     return UserEntity(
       id: user.id ?? '',
       firstName: user.firstName ?? '',

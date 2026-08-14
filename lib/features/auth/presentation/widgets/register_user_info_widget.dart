@@ -12,7 +12,7 @@ import '../../../../core/widgets/image_picker_widget.dart';
 import '../controllers/auth_controller.dart';
 
 class RegisterUserInfoWidget extends StatefulWidget {
-  RegisterUserInfoWidget({super.key});
+  const RegisterUserInfoWidget({super.key});
 
   @override
   State<RegisterUserInfoWidget> createState() => _RegisterUserInfoWidgetState();
@@ -74,7 +74,7 @@ class _RegisterUserInfoWidgetState extends State<RegisterUserInfoWidget> {
                       child: const Icon(Icons.arrow_back, size: 26),
                     ),
                     const Spacer(),
-                    LanguageChanger()
+                    const LanguageChanger()
                   ],
                 ),
                 SizedBox(height: getScreenHeight(context) * 0.025),

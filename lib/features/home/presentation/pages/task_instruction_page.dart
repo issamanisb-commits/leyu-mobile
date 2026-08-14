@@ -10,10 +10,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_formatter.dart';
 import '../../../../core/utils/message.dart';
-import '../../../../core/utils/screen_size.dart';
 import '../../../../core/widgets/loading.dart';
 import '../../../../routes/app_routes.dart';
-import '../../data/models/task_detail.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/entities/task_type_enum.dart';
 import '../controllers/home_controller.dart';
@@ -212,7 +210,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                           borderRadius: BorderRadius.circular(12.0),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
+                              color: Colors.grey.withValues(alpha: 0.1),
                               spreadRadius: 1,
                               blurRadius: 4,
                               offset: const Offset(0, 2),
@@ -306,7 +304,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                             borderRadius: BorderRadius.circular(12.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
+                                color: Colors.grey.withValues(alpha: 0.1),
                                 spreadRadius: 1,
                                 blurRadius: 4,
                                 offset: const Offset(0, 2),
@@ -318,7 +316,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.article,
+                                  const Icon(Icons.article,
                                       color: AppColors.primary, size: 20),
                                   const SizedBox(width: 8),
                                   Text(
@@ -332,7 +330,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                               ),
                               const SizedBox(height: 12),
                               Text(
-                                instruction!.content,
+                                instruction.content,
                                 style:
                                     const TextStyle(fontSize: 14, height: 1.5),
                               ),
@@ -348,7 +346,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: CachedNetworkImage(
-                              imageUrl: instruction!.imageInstructionUrl!,
+                              imageUrl: instruction.imageInstructionUrl!,
                               fit: BoxFit.cover,
                               placeholder: (context, url) => Container(
                                 height: 200,
@@ -372,7 +370,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                           title: 'home.tasks.video_guide'.tr,
                           child: _hasVideoError
                               ? _buildVideoError(
-                                  instruction!.videoInstructionUrl!)
+                                  instruction.videoInstructionUrl!)
                               : _isVideoInitialized
                                   ? Column(
                                       children: [
@@ -411,7 +409,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                           icon: Icons.headphones,
                           title: 'home.tasks.audio_guide'.tr,
                           child: _buildAudioPlayer(
-                              instruction!.audioInstructionUrl!),
+                              instruction.audioInstructionUrl!),
                         ),
 
                       const SizedBox(height: 20),
@@ -427,7 +425,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
+                      color: Colors.grey.withValues(alpha: 0.2),
                       spreadRadius: 1,
                       blurRadius: 4,
                       offset: const Offset(0, -2),
@@ -527,7 +525,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
         borderRadius: BorderRadius.circular(12.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 4,
             offset: const Offset(0, 2),
@@ -565,7 +563,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
         decoration: BoxDecoration(
           color: Colors.grey[100],
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -593,14 +591,14 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.launch, size: 16, color: AppColors.primary),
-                  const SizedBox(width: 6),
+                  SizedBox(width: 6),
                   Text(
                     'Open in Browser',
                     style: TextStyle(
@@ -632,11 +630,12 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
           decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
           ),
           child: Row(
             children: [
-              Icon(Icons.open_in_browser, color: AppColors.primary, size: 32),
+              const Icon(Icons.open_in_browser,
+                  color: AppColors.primary, size: 32),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
@@ -661,7 +660,7 @@ class _TaskInstructionPageState extends State<TaskInstructionPage> {
                   ],
                 ),
               ),
-              Icon(Icons.launch, color: AppColors.primary, size: 20),
+              const Icon(Icons.launch, color: AppColors.primary, size: 20),
             ],
           ),
         ),

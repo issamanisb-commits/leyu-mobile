@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:leyu_mobile/core/theme/app_colors.dart';
@@ -17,7 +15,7 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage>
     with SingleTickerProviderStateMixin {
   final SplashScreenController _splashScreenController =
-  Get.find<SplashScreenController>();
+      Get.find<SplashScreenController>();
 
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 3),

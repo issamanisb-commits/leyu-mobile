@@ -137,8 +137,8 @@ class _ValidatedTextInputWidgetState extends State<ValidatedTextInputWidget> {
                 color: widget.controller.text.isEmpty
                     ? Colors.transparent
                     : (_isValid
-                        ? Colors.green.withOpacity(0.3)
-                        : Colors.orange.withOpacity(0.3)),
+                        ? Colors.green.withValues(alpha: 0.3)
+                        : Colors.orange.withValues(alpha: 0.3)),
               ),
               borderRadius: BorderRadius.circular(18),
             ),

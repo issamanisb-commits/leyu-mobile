@@ -1,3 +1,4 @@
+import '../../data/services/offline_sync_service.dart';
 import 'package:get/get.dart';
 import 'package:leyu_mobile/features/home/data/datasources/task_remote_data_source.dart';
 import 'package:leyu_mobile/features/home/data/services/file_storage_service.dart';
@@ -14,7 +15,6 @@ import '../../../../core/api/api_client.dart';
 import '../../../../core/cache/local_storage.dart';
 import '../controllers/home_controller.dart';
 
-
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
@@ -25,12 +25,14 @@ class HomeBinding extends Bindings {
 
     // Register notification dependencies
     Get.lazyPut(() => NotificationRemoteDataSource(Get.find<ApiClient>()));
-    Get.lazyPut(() => NotificationRepository(Get.find<NotificationRemoteDataSource>()));
+    Get.lazyPut(
+        () => NotificationRepository(Get.find<NotificationRemoteDataSource>()));
     Get.lazyPut(() => NotificationUsecase(Get.find<NotificationRepository>()));
 
     // Register profile dependencies
     Get.lazyPut(() => ProfileRemoteDataSource(Get.find<ApiClient>()));
-    Get.lazyPut(() => ProfileRepositoryImpl(Get.find<ProfileRemoteDataSource>()));
+    Get.lazyPut(
+        () => ProfileRepositoryImpl(Get.find<ProfileRemoteDataSource>()));
     Get.lazyPut(() => ProfileUseCase(Get.find<ProfileRepositoryImpl>()));
 
     // Register storage services
@@ -38,13 +40,16 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => TaskStorageService());
 
     // Register HomeController with storage services and notification usecase
+    Get.lazyPut<OfflineSyncService>(
+        () => OfflineSyncService(Get.find<TaskStorageService>(), Get.find()));
     Get.lazyPut(() => HomeController(
-      Get.find<LocalStorage>(),
-      Get.find<TaskUsecase>(),
-      Get.find<TaskStorageService>(),
-      Get.find<FileStorageService>(),
-      Get.find<NotificationUsecase>(),
-      Get.find<ProfileUseCase>(),
-    ));
+          Get.find<LocalStorage>(),
+          Get.find<TaskUsecase>(),
+          Get.find<TaskStorageService>(),
+          Get.find<FileStorageService>(),
+          Get.find<NotificationUsecase>(),
+          Get.find<ProfileUseCase>(),
+          Get.find<OfflineSyncService>(),
+        ));
   }
 }

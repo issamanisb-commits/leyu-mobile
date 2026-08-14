@@ -24,7 +24,7 @@ class ProgressCircleWidget extends StatelessWidget {
     final int activeSegments = (progress * segments).round();
 
     return Padding(
-      padding: const EdgeInsets.only(left: 3.0 ,right: 8.0),
+      padding: const EdgeInsets.only(left: 3.0, right: 8.0),
       child: SizedBox(
         width: size,
         height: size,
@@ -82,11 +82,14 @@ class ProgressPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
-    final paint = Paint()..style = PaintingStyle.stroke..strokeWidth = 7.0;
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 7.0;
 
     for (int i = 0; i < totalSegments; i++) {
       final startAngle = 2 * 3.14159 * i / totalSegments - 3.14159 / 2;
-      final sweepAngle = 2 * 3.14159 / totalSegments * (totalSegments > 1 ? 0.97 : 0.99);
+      final sweepAngle =
+          2 * 3.14159 / totalSegments * (totalSegments > 1 ? 0.97 : 0.99);
       paint.color = i < activeSegments ? activeColor : inactiveColor;
       canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),

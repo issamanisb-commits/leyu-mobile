@@ -39,7 +39,7 @@ class ProfilePictureWidget extends StatelessWidget {
                     child: SizedBox(
                       width: size / 3,
                       height: size / 3,
-                      child: CircularProgressIndicator(strokeWidth: 2),
+                      child: const CircularProgressIndicator(strokeWidth: 2),
                     ),
                   );
                 },

@@ -20,8 +20,13 @@ class NotificationRemoteDataSource {
 
     final response = await _apiClient.get(
       ApiConstants.notificationsMe,
-      params: params,
+      queryParameters: params,
     );
+
+    print('NOTIFICATIONS RESPONSE:');
+    print(response.data);
+    print('NOTIFICATIONS RESPONSE TYPE:');
+    print(response.data.runtimeType);
 
     return NotificationResponseModel.fromJson(response.data);
   }
@@ -37,7 +42,8 @@ class NotificationRemoteDataSource {
   /// Mark notification as read
   /// Authentication headers are automatically included by ApiInterceptor
   Future<void> markAsRead(String notificationId) async {
-    await _apiClient.patch('${ApiConstants.notificationsMarkAsRead}/$notificationId/read');
+    await _apiClient
+        .patch('${ApiConstants.notificationsMarkAsRead}/$notificationId/read');
   }
 
   /// Mark all notifications as read

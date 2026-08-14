@@ -36,7 +36,8 @@ class MicroTask {
       allowedRetry: json['allowed_retry'] as int?,
       acceptanceStatus: json['acceptance_status'] as String?,
       canRetry: json['can_retry'] as bool?,
-      dataset: json['dataSet'] != null ? Dataset.fromJson(json['dataSet']) : null,
+      dataset:
+          json['dataSet'] != null ? Dataset.fromJson(json['dataSet']) : null,
     );
   }
 }

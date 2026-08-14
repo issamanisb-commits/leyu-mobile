@@ -12,19 +12,20 @@ import '../controllers/auth_controller.dart';
 import '../controllers/splash_screen_controller.dart';
 
 class AuthBinding extends Bindings {
-
   @override
   void dependencies() {
     Get.lazyPut(() => ApiClient());
     Get.lazyPut(() => AuthRemoteDataSource(Get.find()));
     Get.lazyPut(() => AuthRepository(Get.find<AuthRemoteDataSource>()));
     Get.lazyPut(() => LocalStorage());
-    Get.lazyPut(() => AuthUseCase(Get.find<AuthRepository>(),Get.find<LocalStorage>()));
+    Get.lazyPut(() =>
+        AuthUseCase(Get.find<AuthRepository>(), Get.find<LocalStorage>()));
     Get.lazyPut(() => SplashScreenController(Get.find()));
 
-    Get.lazyPut(()=> BaseDataRemoteDataSource(Get.find()));
+    Get.lazyPut(() => BaseDataRemoteDataSource(Get.find()));
     Get.lazyPut(() => BaseDataRepository(Get.find<BaseDataRemoteDataSource>()));
     Get.lazyPut(() => BaseDataUsecase(Get.find<BaseDataRepository>()));
-    Get.lazyPut(() => AuthController(Get.find<AuthUseCase>() , Get.find<BaseDataUsecase>()));
+    Get.lazyPut(() =>
+        AuthController(Get.find<AuthUseCase>(), Get.find<BaseDataUsecase>()));
   }
 }

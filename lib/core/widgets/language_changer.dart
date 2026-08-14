@@ -16,7 +16,8 @@ class LanguageChanger extends StatelessWidget {
 
     return Obx(() {
       // Find the current locale model
-      final currentLocaleModel = LocalizationController.supportedLocales.firstWhere(
+      final currentLocaleModel =
+          LocalizationController.supportedLocales.firstWhere(
         (locale) =>
             locale.languageCode == localizationController.locale.languageCode &&
             locale.countryCode == localizationController.locale.countryCode,

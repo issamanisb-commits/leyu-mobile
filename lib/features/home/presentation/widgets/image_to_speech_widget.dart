@@ -58,7 +58,7 @@ class _ImageToSpeechWidgetState extends State<ImageToSpeechWidget> {
   String? _currentFilePath;
   Duration _recordingDuration = Duration.zero;
 
-  List<double> _amplitudes = [];
+  final List<double> _amplitudes = [];
   Timer? _amplitudeTimer;
   Timer? _durationTimer;
 

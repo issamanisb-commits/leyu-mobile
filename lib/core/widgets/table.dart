@@ -27,8 +27,10 @@ class TableWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: values.length <= 4 ? getScreenWidth(context)-30 : values.length *(getScreenWidth(context) * 0.2),
+            SizedBox(
+              width: values.length <= 4
+                  ? getScreenWidth(context) - 30
+                  : values.length * (getScreenWidth(context) * 0.2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: headers.map((header) {
@@ -57,15 +59,18 @@ class TableWidget extends StatelessWidget {
               )
             else
               ...values.map((row) {
-                return Container(
-                  width: values.length <= 4 ? getScreenWidth(context)-30 : values.length *(getScreenWidth(context) * 0.2),
+                return SizedBox(
+                  width: values.length <= 4
+                      ? getScreenWidth(context) - 30
+                      : values.length * (getScreenWidth(context) * 0.2),
                   child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 2.0),
                     child: Row(
                       children: row.map((value) {
                         return Expanded(
                           child: Container(
-                            padding: const EdgeInsets.only(top: 2.0,bottom: 10),
+                            padding:
+                                const EdgeInsets.only(top: 2.0, bottom: 10),
                             child: Center(child: value),
                           ),
                         );
@@ -79,5 +84,4 @@ class TableWidget extends StatelessWidget {
       ),
     );
   }
-
 }

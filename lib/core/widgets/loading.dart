@@ -9,43 +9,53 @@ class LoadingPopupWidget extends StatelessWidget {
   final List<RxBool> isLoading;
   final RxString? reason;
 
-  const LoadingPopupWidget({super.key, required this.isLoading , this.reason});
+  const LoadingPopupWidget({super.key, required this.isLoading, this.reason});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(()=> isLoading.obs.any((value) => value.value)
+    return Obx(() => isLoading.obs.any((value) => value.value)
         ? Container(
-      color: Colors.black.withOpacity(0.8),
-      height: getScreenHeight(context),
-      alignment: Alignment.center,
-      child: Stack(
-        children: [
-          const ModalBarrier(
-            dismissible: false,
-            color: Colors.transparent,
-          ),
-          Center(
-            child: Container(
-              width: 220,
-              height:110,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white
-              ),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LoadingAnimationWidget.threeArchedCircle(color: AppColors.primary, size: 30),
-                  const SizedBox(height: 20,),
-                  Text((reason == null || reason?.value == "")?"":"${reason?.value}...",style: const TextStyle(fontSize: 14,color: Colors.black,decoration: TextDecoration.none),)
-                ],
-              ),
+            color: Colors.black.withValues(alpha: 0.8),
+            height: getScreenHeight(context),
+            alignment: Alignment.center,
+            child: Stack(
+              children: [
+                const ModalBarrier(
+                  dismissible: false,
+                  color: Colors.transparent,
+                ),
+                Center(
+                  child: Container(
+                    width: 220,
+                    height: 110,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white),
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        LoadingAnimationWidget.threeArchedCircle(
+                            color: AppColors.primary, size: 30),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          (reason == null || reason?.value == "")
+                              ? ""
+                              : "${reason?.value}...",
+                          style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    )
+          )
         : const SizedBox.shrink());
   }
 }
@@ -55,15 +65,18 @@ class LoadingOverlayWidget extends StatelessWidget {
   final List<RxBool> isLoading;
   final RxString? reason;
 
-
-  const LoadingOverlayWidget({super.key, required this.child,required this.isLoading,this.reason});
+  const LoadingOverlayWidget(
+      {super.key, required this.child, required this.isLoading, this.reason});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         child,
-        LoadingPopupWidget(isLoading: isLoading,reason: reason,),
+        LoadingPopupWidget(
+          isLoading: isLoading,
+          reason: reason,
+        ),
       ],
     );
   }
@@ -90,21 +103,29 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height:height,
+      height: height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: isTransparent ? Colors.transparent:Colors.white
-      ),
+          color: isTransparent ? Colors.transparent : Colors.white),
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           LoadingAnimationWidget.threeArchedCircle(color: color, size: size),
-          SizedBox(height: height>80?10:0,),
-          reason == null ? Container():Text(reason!,style: const TextStyle(fontSize: 12,color: Colors.black,decoration: TextDecoration.none),),
+          SizedBox(
+            height: height > 80 ? 10 : 0,
+          ),
+          reason == null
+              ? Container()
+              : Text(
+                  reason!,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                      decoration: TextDecoration.none),
+                ),
         ],
       ),
     );
-
   }
 }

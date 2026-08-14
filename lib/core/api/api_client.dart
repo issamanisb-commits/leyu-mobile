@@ -1,121 +1,157 @@
 import 'package:dio/dio.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import '../errors/exceptions.dart';
+
 import 'api_constants.dart';
+import '../errors/exceptions.dart';
 import 'api_interceptor.dart';
 
 class ApiClient {
   late final Dio _dio;
 
-  ApiClient() {
-    _dio = Dio(
-      BaseOptions(
-        baseUrl: ApiConstants.baseUrl,
-        connectTimeout: const Duration(seconds: 120),
-        receiveTimeout: const Duration(seconds: 120),
-      ),
-    )..interceptors.add(ApiInterceptor());
+  ApiClient({Dio? dio}) {
+    _dio = dio ??
+        Dio(
+          BaseOptions(
+            baseUrl: ApiConstants.baseUrl,
+            connectTimeout: const Duration(seconds: 120),
+            receiveTimeout: const Duration(seconds: 120),
+          ),
+        )
+      ..interceptors.add(ApiInterceptor());
   }
 
-  Future<Response> get(String endpoint, {bool includeToken = false , Map<String, dynamic>? params}) async {
+  Future<Response> get(
+    String path, {
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      final response = await _dio.get(endpoint, queryParameters: params);
+      final response = await _dio.get(
+        path,
+        queryParameters: params ?? queryParameters,
+        options: options,
+      );
       return response;
-    } catch (e) {
-      print(e);
-      if(e is DioException && e.response != null) {
-        print(e.response?.data ?? "hey");
-      }
-      throw _handleError(e, endpoint);
+    } on DioException catch (e) {
+      throw _handleError(e);
     }
   }
 
-  Future<Response> post(String endpoint, {dynamic data , Options? options , String? baseUrl}) async {
+  Future<Response> post(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      if(baseUrl != null) {
-        _dio.options.baseUrl = baseUrl;
-      }
-      return await _dio.post(endpoint, data: data,options: options);
-    } catch (e) {
-      throw _handleError(e, endpoint);
+      final response = await _dio.post(
+        path,
+        data: data,
+        queryParameters: params ?? queryParameters,
+        options: options,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw _handleError(e);
     }
   }
 
-  Future<Response> patch(String endpoint, {dynamic data}) async {
+  Future<Response> put(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      return await _dio.patch(endpoint, data: data);
-    } catch (e) {
-      throw _handleError(e, endpoint);
+      final response = await _dio.put(
+        path,
+        data: data,
+        queryParameters: params ?? queryParameters,
+        options: options,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw _handleError(e);
     }
   }
 
-  Future<Response> put(String endpoint, {dynamic data , Options? options}) async {
+  Future<Response> patch(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      return await _dio.put(endpoint, data: data);
-    } catch (e) {
-      throw _handleError(e, endpoint);
+      final response = await _dio.patch(
+        path,
+        data: data,
+        queryParameters: params ?? queryParameters,
+        options: options,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw _handleError(e);
     }
   }
 
-  Future<Response> delete(String endpoint, {dynamic data}) async {
+  Future<Response> delete(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      return await _dio.delete(endpoint, data: data);
-    } catch (e) {
-      throw _handleError(e, endpoint);
+      final response = await _dio.delete(
+        path,
+        data: data,
+        queryParameters: params ?? queryParameters,
+        options: options,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw _handleError(e);
     }
   }
 
-  /// 🛑 Handles errors gracefully and returns meaningful exceptions
-  Exception _handleError(dynamic error, String endpoint) {
-    try{
-    String errorMessage = "Something went wrong";
-    int statusCode = 500;
+  Exception _handleError(DioException error) {
+    switch (error.type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+        return TimeoutException(
+          "Connection timeout. Please try again.",
+        );
 
-    if (error is DioException) {
-      print(error);
-      print("❌ API Error: ${error.message} $endpoint");
-      print(error.response?.data);
+      case DioExceptionType.badResponse:
+        final statusCode = error.response?.statusCode;
+        final data = error.response?.data;
 
-      switch (error.type) {
-        case DioExceptionType.connectionTimeout:
-          return TimeoutException("Connection timeout. try again.");
-        case DioExceptionType.sendTimeout:
-          return TimeoutException("Request timeout. Please check your connection.");
-        case DioExceptionType.receiveTimeout:
-          return TimeoutException("Server took too long to respond.");
-        case DioExceptionType.cancel:
-          return Exception("Request was cancelled.");
-        case DioExceptionType.connectionError:
-          return NetworkException("No internet connection.");
+        final message = data is Map
+            ? data['message'] ?? 'An error occurred'
+            : 'An error occurred';
 
-        case DioExceptionType.badResponse:
-          statusCode = error.response?.statusCode ?? 500;
-          final responseData = error.response?.data;
-          if (statusCode == 400) {
-            return BadRequestException(responseData?["message"] ?? "Bad request.");
-          } else if (statusCode == 401) {
-            return UnauthorizedException(responseData?["message"] ?? "Unauthorized.");
-          } else if (statusCode == 403) {
-            return ForbiddenException("Forbidden access.");
-          } else if (statusCode == 404) {
-            return NotFoundException(responseData?["message"] ?? "Resource not found.");
-          } else if (statusCode == 500) {
-            return ServerException(responseData?["message"] ?? "Internal server error.");
-          } else {
-            return Exception(responseData?["message"] ?? "Unexpected API error.");
-          }
+        return ServerException(
+          message.toString(),
+        );
 
-        default:
-          return Exception("Unexpected error occurred.");
-      }
-    }
-    else {
-      print("❌ Unexpected Error: $error");
-      return Exception("Unexpected error: $error");
-    }
-  }
-    catch(e) {
-      return Exception("Unexpected error: $error");
+      case DioExceptionType.connectionError:
+        return NetworkException(
+          "No internet connection.",
+        );
+
+      case DioExceptionType.cancel:
+        return Exception(
+          "Request cancelled.",
+        );
+
+      default:
+        return NetworkException(
+          "Something went wrong. Please try again.",
+        );
     }
   }
 }

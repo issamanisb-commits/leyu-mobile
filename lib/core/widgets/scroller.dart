@@ -8,7 +8,7 @@ class ScrollableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      physics:const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverPadding(
           padding: EdgeInsets.zero,

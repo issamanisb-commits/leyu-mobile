@@ -31,7 +31,8 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
-    _playerId = 'audio_${widget.audioUrl}_${DateTime.now().millisecondsSinceEpoch}';
+    _playerId =
+        'audio_${widget.audioUrl}_${DateTime.now().millisecondsSinceEpoch}';
     _audioManager = Get.find<AudioManagerService>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _init();
@@ -187,66 +188,76 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: _isLoading
-          ? const Center(child: LoadingWidget(isTransparent: true,size: 24,))
+          ? const Center(
+              child: LoadingWidget(
+              isTransparent: true,
+              size: 24,
+            ))
           : Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: GestureDetector(
-              onTap: _playPause,
-              child: Container(
-                margin: const EdgeInsets.only(right: 25.0),
-                child: Icon(
-                  _isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: AppColors.primary,
-                  size: 35,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${_position.inMinutes}:${(_position.inSeconds % 60).toString().padLeft(2, '0')}',
-                      style: const TextStyle(fontSize: 12.0),
+                Center(
+                  child: GestureDetector(
+                    onTap: _playPause,
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 25.0),
+                      child: Icon(
+                        _isPlaying ? Icons.pause : Icons.play_arrow,
+                        color: AppColors.primary,
+                        size: 35,
+                      ),
                     ),
-                    Text(
-                      '-${(_duration - _position).inMinutes}:${((_duration - _position).inSeconds % 60).toString().padLeft(2, '0')}',
-                      style: const TextStyle(fontSize: 12.0),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 2.0),
-                SliderTheme(
-                  data: const SliderThemeData(
-                    trackShape: RoundedRectSliderTrackShape(),
-                    trackHeight: 4.0,
-                    overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
-                    thumbShape: RoundSliderThumbShape(
-                      enabledThumbRadius: 8.0,
-                    ),
-                    thumbColor: AppColors.primary,
                   ),
-                  child: Slider(
-                    value: _position.inSeconds.toDouble().clamp(0.0, _duration.inSeconds.toDouble()),
-                    max: _duration.inSeconds > 0 ? _duration.inSeconds.toDouble() : 1.0,
-                    onChanged: (value) async {
-                      await _audioPlayer.seek(Duration(seconds: value.toInt()));
-                    },
-                    activeColor: AppColors.primary,
-                    inactiveColor: Color(0xFFDFDFDF),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${_position.inMinutes}:${(_position.inSeconds % 60).toString().padLeft(2, '0')}',
+                            style: const TextStyle(fontSize: 12.0),
+                          ),
+                          Text(
+                            '-${(_duration - _position).inMinutes}:${((_duration - _position).inSeconds % 60).toString().padLeft(2, '0')}',
+                            style: const TextStyle(fontSize: 12.0),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 2.0),
+                      SliderTheme(
+                        data: const SliderThemeData(
+                          trackShape: RoundedRectSliderTrackShape(),
+                          trackHeight: 4.0,
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 0.0),
+                          thumbShape: RoundSliderThumbShape(
+                            enabledThumbRadius: 8.0,
+                          ),
+                          thumbColor: AppColors.primary,
+                        ),
+                        child: Slider(
+                          value: _position.inSeconds
+                              .toDouble()
+                              .clamp(0.0, _duration.inSeconds.toDouble()),
+                          max: _duration.inSeconds > 0
+                              ? _duration.inSeconds.toDouble()
+                              : 1.0,
+                          onChanged: (value) async {
+                            await _audioPlayer
+                                .seek(Duration(seconds: value.toInt()));
+                          },
+                          activeColor: AppColors.primary,
+                          inactiveColor: const Color(0xFFDFDFDF),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
