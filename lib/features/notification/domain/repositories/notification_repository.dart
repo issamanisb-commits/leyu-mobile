@@ -24,7 +24,8 @@ class NotificationRepository {
         final failure = mapExceptionToFailure(e);
         return Left(_enhanceFailureMessage(failure, 'load notifications'));
       }
-      return const Left(ServerFailure('Failed to load notifications. Please try again.'));
+      return const Left(
+          ServerFailure('Failed to load notifications. Please try again.'));
     }
   }
 
@@ -50,7 +51,8 @@ class NotificationRepository {
     } catch (e) {
       if (e is Exception) {
         final failure = mapExceptionToFailure(e);
-        return Left(_enhanceFailureMessage(failure, 'mark notification as read'));
+        return Left(
+            _enhanceFailureMessage(failure, 'mark notification as read'));
       }
       return const Left(ServerFailure('Failed to mark notification as read'));
     }
@@ -64,24 +66,27 @@ class NotificationRepository {
     } catch (e) {
       if (e is Exception) {
         final failure = mapExceptionToFailure(e);
-        return Left(_enhanceFailureMessage(failure, 'mark all notifications as read'));
+        return Left(
+            _enhanceFailureMessage(failure, 'mark all notifications as read'));
       }
-      return const Left(ServerFailure('Failed to mark all notifications as read'));
+      return const Left(
+          ServerFailure('Failed to mark all notifications as read'));
     }
   }
 
   /// Enhance failure messages with user-friendly context
   Failure _enhanceFailureMessage(Failure failure, String action) {
     if (failure is NetworkFailure) {
-      return NetworkFailure('No internet connection. Please check your network and try again.');
+      return const NetworkFailure(
+          'No internet connection. Please check your network and try again.');
     } else if (failure is TimeoutFailure) {
-      return TimeoutFailure('Request timed out. Please try again.');
+      return const TimeoutFailure('Request timed out. Please try again.');
     } else if (failure is UnauthorizedFailure) {
-      return UnauthorizedFailure('Session expired. Please log in again.');
+      return const UnauthorizedFailure('Session expired. Please log in again.');
     } else if (failure is NotFoundFailure) {
-      return NotFoundFailure('Notification not found.');
+      return const NotFoundFailure('Notification not found.');
     } else if (failure is ServerFailure) {
-      return ServerFailure('Server error. Please try again later.');
+      return const ServerFailure('Server error. Please try again later.');
     }
     return failure;
   }

@@ -11,7 +11,8 @@ class NotificationPage extends StatelessWidget {
   NotificationPage({super.key});
 
   final NotificationController _controller = Get.find();
-  final RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   Widget build(BuildContext context) {
@@ -267,7 +268,8 @@ class NotificationPage extends StatelessWidget {
     return total;
   }
 
-  Widget _buildGroupedItem(Map<String, List<dynamic>> groupedNotifications, int index) {
+  Widget _buildGroupedItem(
+      Map<String, List<dynamic>> groupedNotifications, int index) {
     int currentIndex = 0;
 
     for (var entry in groupedNotifications.entries) {
@@ -284,7 +286,7 @@ class NotificationPage extends StatelessWidget {
         final notification = entry.value[notificationIndex];
         return NotificationItemWidget(
           notification: notification,
-          onTap: (){
+          onTap: () {
             print('Notification tapped: ${notification.title}');
           },
         );
