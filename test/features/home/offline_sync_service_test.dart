@@ -1,8 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_test/hive_test.dart';
 import 'package:leyu_mobile/features/home/data/services/task_storage_service.dart';
-import 'package:leyu_mobile/features/home/data/services/offline_sync_service.dart';
-import 'package:leyu_mobile/features/home/data/models/task_submission_model.dart';
 
 void main() {
   late TaskStorageService storageService;

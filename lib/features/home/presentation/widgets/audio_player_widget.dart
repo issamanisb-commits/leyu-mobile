@@ -197,14 +197,19 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(
-                  child: GestureDetector(
-                    onTap: _playPause,
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 25.0),
-                      child: Icon(
-                        _isPlaying ? Icons.pause : Icons.play_arrow,
-                        color: AppColors.primary,
-                        size: 35,
+                  child: Semantics(
+                    button: true,
+                    enabled: true,
+                    label: _isPlaying ? "Pause audio" : "Play audio",
+                    child: GestureDetector(
+                      onTap: _playPause,
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 25.0),
+                        child: Icon(
+                          _isPlaying ? Icons.pause : Icons.play_arrow,
+                          color: AppColors.primary,
+                          size: 35,
+                        ),
                       ),
                     ),
                   ),

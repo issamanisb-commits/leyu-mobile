@@ -514,6 +514,7 @@ class _ImageToTextWidgetState extends State<ImageToTextWidget> {
     }
 
     await _saveAndNavigate(context, task, inputText);
+    if (!context.mounted) return;
   }
 
   bool _validateTextInput(String inputText, TaskDetailEntity task) {
@@ -550,6 +551,7 @@ class _ImageToTextWidgetState extends State<ImageToTextWidget> {
     if (nextEligibleIndex != null) {
       if (!context.mounted) return;
       await _navigateToNextTask(context, task, nextEligibleIndex);
+      if (!context.mounted) return;
     } else {
       _submitFinalTask(inputText);
     }

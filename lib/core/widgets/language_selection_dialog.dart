@@ -44,6 +44,8 @@ class LanguageSelectionDialog extends StatelessWidget {
                             localeModel.languageCode,
                             localeModel.countryCode,
                           );
+
+                          if (!context.mounted) return;
                           // Best-effort API update — fire and forget
                           _updateLanguageOnServer(localeModel.languageCode);
                           if (!context.mounted) return;
