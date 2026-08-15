@@ -66,7 +66,7 @@ class StorageErrorHandler {
   /// Handle data recovery scenarios
   static void handleDataRecovery(int audioCount, int textCount) {
     if (audioCount > 0 || textCount > 0) {
-      final message = _buildRecoveryMessage(audioCount, textCount);
+      showSuccessMessage(_buildRecoveryMessage(audioCount, textCount));
     }
   }
 

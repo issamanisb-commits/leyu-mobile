@@ -19,7 +19,8 @@ Widget assetSvgImageWidget(String imageUrl,
     "assets/images/$imageUrl",
     width: width,
     height: height,
-    color: color,
+    colorFilter:
+        color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
     fit: fit ?? BoxFit.contain,
   );
 }

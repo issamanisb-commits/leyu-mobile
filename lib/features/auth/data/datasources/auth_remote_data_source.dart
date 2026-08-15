@@ -99,8 +99,7 @@ class AuthRemoteDataSource {
 
   Future<void> requestOtp(String phoneNumber) async {
     try {
-      final response =
-          await _apiClient.post('/iam/auth/forgot-password', data: {
+      await _apiClient.post('/iam/auth/forgot-password', data: {
         'username': phoneNumber,
       });
     } catch (e) {

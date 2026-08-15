@@ -127,7 +127,6 @@ class ApiClient {
         );
 
       case DioExceptionType.badResponse:
-        final statusCode = error.response?.statusCode;
         final data = error.response?.data;
 
         final message = data is Map

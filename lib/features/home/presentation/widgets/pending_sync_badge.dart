@@ -19,7 +19,8 @@ class PendingSyncBadge extends GetView<HomeController> {
           children: [
             Row(
               children: [
-                const Icon(Icons.cloud_upload_outlined, color: Colors.amber, size: 28),
+                const Icon(Icons.cloud_upload_outlined,
+                    color: Colors.amber, size: 28),
                 const SizedBox(width: 12),
                 Text(
                   'Pending Offline Submissions',
@@ -84,7 +85,7 @@ class PendingSyncBadge extends GetView<HomeController> {
                 Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: Colors.amber.withOpacity(0.15),
+                    color: Colors.amber.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(

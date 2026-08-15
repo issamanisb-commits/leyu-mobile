@@ -71,8 +71,6 @@ class HomeController extends GetxController {
   // Track current task loading to allow cancellation
   String? _currentLoadingTaskId;
 
-  @override
-  
   void triggerManualSync() {
     Get.snackbar(
       'Syncing...',

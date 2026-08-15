@@ -100,22 +100,22 @@ String? validateNumber(String? value, String label) {
 }
 
 class InputBoxWidget extends StatefulWidget {
-  InputType inputType;
-  String label;
-  String? placeHolder;
-  TextEditingController controller;
-  FocusNode? focus;
-  FocusNode? focusNext;
-  EdgeInsets? padding;
-  TextEditingController? pass;
-  VoidCallback? onEnter;
-  bool showLabel;
-  bool isOptional;
-  int maxLines;
-  double? height;
-  double borderRadius;
-  bool shouldValidate;
-  bool enabled;
+  final InputType inputType;
+  final String label;
+  final String? placeHolder;
+  final TextEditingController controller;
+  final FocusNode? focus;
+  final FocusNode? focusNext;
+  final EdgeInsets? padding;
+  final TextEditingController? pass;
+  final VoidCallback? onEnter;
+  final bool showLabel;
+  final bool isOptional;
+  final int maxLines;
+  final double? height;
+  final double borderRadius;
+  final bool shouldValidate;
+  final bool enabled;
 
   InputBoxWidget({
     super.key,
@@ -245,7 +245,6 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
     );
   }
 
-
   TextInputType _getKeyboardType(InputType type) {
     switch (type) {
       case InputType.number:
@@ -282,10 +281,10 @@ class _InputBoxWidgetState extends State<InputBoxWidget> {
 class SearchInputBoxWidget extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode? focusNode;
-  double height;
-  double radius;
-  String label = "Search";
-  VoidCallback onChange;
+  final double height;
+  final double radius;
+  final String label;
+  final VoidCallback onChange;
 
   SearchInputBoxWidget({
     super.key,
@@ -347,15 +346,15 @@ class SearchInputBoxWidget extends StatelessWidget {
 }
 
 class PhoneInputBoxWidget extends StatelessWidget {
-  TextEditingController controller;
-  FocusNode? focus;
-  FocusNode? focusNext;
-  String? placeHolder;
-  double height;
-  double radius;
-  String label = "Phone Number";
-  bool showLabel = true;
-  bool enabled;
+  final TextEditingController controller;
+  final FocusNode? focus;
+  final FocusNode? focusNext;
+  final String? placeHolder;
+  final double height;
+  final double radius;
+  final String label;
+  final bool showLabel;
+  final bool enabled;
 
   PhoneInputBoxWidget({
     super.key,

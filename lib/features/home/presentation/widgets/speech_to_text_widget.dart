@@ -537,6 +537,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget> {
     final nextEligibleIndex = _findNextEligibleIndex(task, currentIndex);
 
     if (nextEligibleIndex != null) {
+      if (!context.mounted) return;
       await _navigateToNextTask(context, task, nextEligibleIndex);
     } else {
       _submitFinalTask(inputText);
@@ -561,6 +562,8 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget> {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
 
     await Future.delayed(const Duration(milliseconds: 300));
+
+    if (!context.mounted) return;
 
     final screenHeight = MediaQuery.of(context).size.height;
     final isSmallScreen = ScreenConstants.isSmallScreen(screenHeight);
@@ -590,6 +593,8 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget> {
         duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
       );
+
+      if (!context.mounted) return;
 
       _isNavigating = false;
     }

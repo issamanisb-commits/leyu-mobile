@@ -99,7 +99,7 @@ class AuthController extends GetxController {
   Future<void> activateAccount(String otp) async {
     isActivatingAccount.value = true;
     registerLoadingReason.value = "Activating account";
-    final isSuccess = await _authUseCase.activateAccount(
+    await _authUseCase.activateAccount(
         verificationId.value!, registeredPhone.value, otp);
 
     isActivatingAccount.value = false;

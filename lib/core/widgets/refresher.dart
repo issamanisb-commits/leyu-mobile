@@ -1,30 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh_new/pull_to_refresh.dart';
 
-class RefresherWidget extends StatelessWidget {
+class RefresherWidget extends StatefulWidget {
   final Widget child;
   final VoidCallback onRefresh;
 
-  RefresherWidget({super.key, required this.child, required this.onRefresh});
+  const RefresherWidget({
+    super.key,
+    required this.child,
+    required this.onRefresh,
+  });
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  @override
+  State<RefresherWidget> createState() => _RefresherWidgetState();
+}
+
+class _RefresherWidgetState extends State<RefresherWidget> {
+  late final RefreshController _refreshController;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshController = RefreshController(initialRefresh: false);
+  }
+
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
-      controller: refreshController,
+      controller: _refreshController,
       enablePullDown: true,
       enablePullUp: false,
       header: const WaterDropHeader(),
       onRefresh: () {
-        onRefresh();
-        refreshController.refreshCompleted();
+        widget.onRefresh();
+        _refreshController.refreshCompleted();
       },
       onLoading: () {
-        refreshController.loadComplete();
+        _refreshController.loadComplete();
       },
-      child: child,
+      child: widget.child,
     );
   }
 }
