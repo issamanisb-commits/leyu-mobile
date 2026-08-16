@@ -30,10 +30,10 @@ class TaskCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
-      padding: const EdgeInsets.all(12.0),
+      padding: EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
+        color: Get.isDarkMode ? const Color(0xFF2C2C2C) : Colors.white,
+        border: Border.all(color: Get.isDarkMode ? Colors.white12 : Colors.grey.withValues(alpha: 0.2)),
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: InkWell(
@@ -126,9 +126,9 @@ class TaskCardWidget extends StatelessWidget {
                                 isCompleted
                                     ? '${'home.tasks.submitted_on'.tr} '
                                     : '${'home.tasks.deadline_on'.tr} ',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12.0,
-                                  color: AppColors.grayText,
+                                  color: Get.isDarkMode ? Colors.grey[400] : AppColors.grayText,
                                 ),
                               ),
                               Text(

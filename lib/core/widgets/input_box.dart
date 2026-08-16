@@ -311,18 +311,18 @@ class SearchInputBoxWidget extends StatelessWidget {
               focusNode: focusNode,
               style: const TextStyle(fontSize: 15),
               textAlignVertical: TextAlignVertical.center,
-              cursorColor: Colors.black,
+              cursorColor: Theme.of(context).textSelectionTheme.cursorColor ?? Theme.of(context).primaryColor,
               onChanged: (String changedText) {
                 onChange();
               },
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Theme.of(context).cardColor,
                 hintText: label,
                 hintStyle: const TextStyle(color: Colors.grey),
-                prefixIcon: const Icon(
+                prefixIcon: Icon(
                   Icons.search,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                 ),
                 contentPadding: const EdgeInsets.only(left: 20),
                 focusedBorder: OutlineInputBorder(
@@ -432,7 +432,7 @@ class PhoneInputBoxWidget extends StatelessWidget {
                 style: const TextStyle(fontSize: 15),
                 textAlignVertical: TextAlignVertical.center,
                 autovalidateMode: AutovalidateMode.onUnfocus,
-                cursorColor: Colors.black,
+                cursorColor: Theme.of(context).textSelectionTheme.cursorColor ?? Theme.of(context).primaryColor,
                 validator: (value) {
                   return validatePhone(value);
                 },

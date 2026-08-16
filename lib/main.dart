@@ -93,23 +93,20 @@ Future<void> _performStartupCleanup() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return Obx(() => GetMaterialApp(
       title: 'Leyu',
       debugShowCheckedModeBanner: false,
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
       themeMode: ThemeService().theme,
-      // Localization configuration
       translations: AppTranslations(),
       locale: Get.find<LocalizationController>().locale,
       fallbackLocale: const Locale('en', 'US'),
-
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       defaultTransition: Transition.fadeIn,
-    );
+    ));
   }
 }

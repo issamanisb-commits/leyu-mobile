@@ -15,8 +15,8 @@ class BottomNavigationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
         border: Border(
           top: BorderSide(
             color: AppColors.gray,
