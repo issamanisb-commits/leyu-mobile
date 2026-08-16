@@ -11,7 +11,10 @@ import 'package:leyu_mobile/features/notification/domain/usecases/notification_u
 import 'package:leyu_mobile/features/profile/data/datasources/profile_remote_data_source.dart';
 import 'package:leyu_mobile/features/profile/data/repositories/profile_repository.dart';
 import 'package:leyu_mobile/features/profile/domain/usecases/profile_usecase.dart';
+import 'package:dio/dio.dart';
 import '../../../../core/api/api_client.dart';
+import '../../../../core/api/api_constants.dart';
+import '../../../../core/api/api_interceptor.dart';
 import '../../../../core/cache/local_storage.dart';
 import '../controllers/home_controller.dart';
 
@@ -39,9 +42,14 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => FileStorageService());
     Get.lazyPut(() => TaskStorageService());
 
+    // Register a Dio instance for OfflineSyncService (with auth interceptor)
+    Get.lazyPut<Dio>(() => Dio(
+          BaseOptions(baseUrl: ApiConstants.baseUrl),
+        )..interceptors.add(ApiInterceptor()));
+
     // Register HomeController with storage services and notification usecase
-    Get.lazyPut<OfflineSyncService>(
-        () => OfflineSyncService(Get.find<TaskStorageService>(), Get.find()));
+    Get.lazyPut<OfflineSyncService>(() =>
+        OfflineSyncService(Get.find<TaskStorageService>(), Get.find<Dio>()));
     Get.lazyPut(() => HomeController(
           Get.find<LocalStorage>(),
           Get.find<TaskUsecase>(),
