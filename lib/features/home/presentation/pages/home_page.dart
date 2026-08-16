@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.appBgColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: RefresherWidget(
           onRefresh: () {
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
             child: Column(
               children: [
-                const PendingSyncBadge(),
+                PendingSyncBadge(),
                 IconButton(
                   icon: Icon(
                     Get.isDarkMode
@@ -131,8 +131,8 @@ class _HomePageState extends State<HomePage> {
                                 overflow: TextOverflow.ellipsis,
                               )),
                           Text('home.welcome_message'.tr,
-                              style: const TextStyle(
-                                  fontSize: 13, color: AppColors.grayText)),
+                              style: TextStyle(
+                                  fontSize: 13, color: Get.isDarkMode ? Colors.grey[400] : AppColors.grayText)),
                         ],
                       ),
                     ),
@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                               assetSvgImageWidget("notification.svg",
                                   width: 34,
                                   height: 34,
-                                  color: const Color(0xFF364957)),
+                                  color: Theme.of(context).iconTheme.color ?? const Color(0xFF364957)),
                               Obx(() {
                                 final count =
                                     _homeController.notificationCount.value;
@@ -219,10 +219,10 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('home.tasks.your_tasks'.tr,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 15.5,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.darkGray)),
+                            color: Get.isDarkMode ? Colors.white : AppColors.darkGray)),
                     InkWell(
                       onTap: () {
                         _homeController.fetchUserBalance();

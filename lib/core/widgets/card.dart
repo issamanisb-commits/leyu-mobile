@@ -26,7 +26,7 @@ class CardWidget extends StatelessWidget {
         margin: const EdgeInsets.only(right: 10, bottom: 10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: AppColors.gray),
           boxShadow: [
@@ -79,7 +79,7 @@ class SelectableCardWidget extends StatelessWidget {
       margin: const EdgeInsets.only(right: 10, bottom: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(10),
         border:
             Border.all(color: isSelected ? AppColors.green : AppColors.gray),
@@ -106,7 +106,7 @@ class SelectableCardWidget extends StatelessWidget {
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: isSelected ? AppColors.green : Colors.black),
+                color: isSelected ? AppColors.green : Theme.of(context).textTheme.bodyLarge?.color),
             overflow: TextOverflow.ellipsis,
           ),
         ],

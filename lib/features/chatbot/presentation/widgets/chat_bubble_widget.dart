@@ -58,7 +58,7 @@ class ChatBubbleWidget extends StatelessWidget {
             ? null
             : message.isError
                 ? const Color(0xFFFEE2E2)
-                : Colors.white,
+                : Colors.grey[800] ?? const Color(0xFF1E1E1E),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(isUser ? 20 : (isFirstInGroup ? 20 : 4)),
           topRight: Radius.circular(isUser ? (isFirstInGroup ? 20 : 4) : 20),
@@ -82,7 +82,7 @@ class ChatBubbleWidget extends StatelessWidget {
               ? Colors.white
               : message.isError
                   ? const Color(0xFFDC2626)
-                  : const Color(0xFF1F2937),
+                  : Colors.grey[800] ?? Colors.white,
           fontSize: 15,
           height: 1.4,
           fontWeight: FontWeight.w400,

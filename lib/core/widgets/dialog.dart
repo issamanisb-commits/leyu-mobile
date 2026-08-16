@@ -38,7 +38,7 @@ void showConfirmationDialog(
                         child: const Icon(
                           Icons.close,
                           size: 22,
-                          color: Colors.black,
+                          color: Theme.of(context).iconTheme.color,
                         ))
                   ],
                 ),
@@ -48,7 +48,7 @@ void showConfirmationDialog(
               ),
               const Divider(
                 thickness: 1,
-                color: Colors.black,
+                color: Theme.of(context).iconTheme.color,
               )
             ],
           ),
@@ -57,7 +57,7 @@ void showConfirmationDialog(
           content: SizedBox(
               width: getScreenWidth(context),
               child: SingleChildScrollView(
-                  child: Text(description, textAlign: TextAlign.center))),
+                  child: Text(description, textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color)))),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),

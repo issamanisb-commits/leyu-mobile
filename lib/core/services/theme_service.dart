@@ -15,8 +15,14 @@ class ThemeService {
     }
   }
 
+  static final RxBool _isDark = false.obs;
+
+  ThemeService() {
+    _isDark.value = _loadThemeFromBox();
+  }
+
   /// Load theme mode from Hive storage
-  ThemeMode get theme => _loadThemeFromBox() ? ThemeMode.dark : ThemeMode.light;
+  ThemeMode get theme => _isDark.value ? ThemeMode.dark : ThemeMode.light;
 
   bool _loadThemeFromBox() {
     if (!Hive.isBoxOpen(_boxName)) return false;
@@ -31,11 +37,12 @@ class ThemeService {
   }
 
   /// Get current theme boolean state
-  bool isDarkMode() => _loadThemeFromBox();
+  bool isDarkMode() => _isDark.value;
 
   /// Switch theme dynamically
   void switchTheme() {
-    final newMode = !_loadThemeFromBox();
+    final newMode = !_isDark.value;
+    _isDark.value = newMode;
     Get.changeThemeMode(newMode ? ThemeMode.dark : ThemeMode.light);
     _saveThemeToBox(newMode);
   }
